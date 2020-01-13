@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers/rootReducer';
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
 
 const history = createBrowserHistory();
