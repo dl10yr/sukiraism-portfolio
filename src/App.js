@@ -7,6 +7,11 @@ import Auth from './containers/Auth';
 import Login from './containers/Login';
 import Create from './containers/Create';
 import PostsList from './containers/PostsList';
+import PostsDetail from './containers/PostDetail';
+import UserDetail from './containers/UserDetail';
+import Search from './containers/Search';
+
+
 import ResponsiveDrawer from './containers/ResponsiveDrawer';
 import RouteRelatedBottomNavigation from './containers/RouteRelatedBottomNavigation';
 
@@ -28,6 +33,10 @@ class App extends Component {
                 <Route exact path="/" component={Home} />
                 <Route path='/create' component={Create} />
                 <Route path='/postslist' component={PostsList} />
+                <Route exact path="/posts/:id" component={PostsDetail} />
+                <Route exact path="/users/:user_name" component={UserDetail} />
+                <Route exact path="/search" component={Search} />
+
               </Switch>
             </Auth>
           </Switch>
