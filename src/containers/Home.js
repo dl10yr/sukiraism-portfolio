@@ -166,9 +166,9 @@ class Home extends React.Component {
     return (
       <div className="home">
         <div className="background">
-          <Button size="large" variant="contained" color="blue" onClick={this.reload} className={classes.sukibutton}>
+          <button size="large" variant="contained" color="blue" onClick={this.reload} className="reload-btn">
             再読み込み
-            </Button>
+          </button>
         </div>
         <Cards
           onEnd={this.endSwipe}
@@ -189,12 +189,12 @@ class Home extends React.Component {
 
         </Cards>
         <div className="buttonArea">
-          <Button size="large" variant="contained" color="blue" onClick={() => { cards.dislike(); }} className={classes.sukibutton}>
+          <button onClick={() => { cards.dislike(); }} className="simple_square_btn kirai-btn">
             キライ
-          </Button>
-          <Button size="large" variant="contained" color="red" onClick={() => { cards.like(); }} className={classes.kiraibutton}>
+          </button>
+          <button onClick={() => { cards.like(); }} className="simple_square_btn suki-btn">
             スキ
-        </Button>
+          </button>
         </div>
 
       </div >

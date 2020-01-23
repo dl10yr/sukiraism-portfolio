@@ -15,6 +15,7 @@ import Icon from '@material-ui/core/Icon';
 import SettingsIcon from '@material-ui/icons/Settings';
 import InfoIcon from '@material-ui/icons/Info';
 import HomeIcon from '@material-ui/icons/Home';
+import ShareIcon from '@material-ui/icons/Share';
 
 // import titlepng from '../images/sukiraism_title.png'
 
@@ -96,6 +97,9 @@ const styles = theme => ({
   flex: {
     flexGrow: 1,
   },
+  a: {
+    color: 'white',
+  }
 });
 
 class ResponsiveDrawer extends React.Component {
@@ -127,11 +131,11 @@ class ResponsiveDrawer extends React.Component {
       )
     } else {
       return (
-        <a href={process.env.REACT_APP_API127_URL + "/api/v1/auth/twitter?auth_origin_url=" + process.env.REACT_APP_BASE_URL} >
+        <a className={classes.a} href={process.env.REACT_APP_API127_URL + "/api/v1/auth/twitter?auth_origin_url=" + process.env.REACT_APP_BASE_URL} >
           <Icon>add_circle</Icon>
-        </a >
+        </a>
 
-      )
+      );
     }
   }
   renderDeletewithCondition() {
@@ -181,7 +185,7 @@ class ResponsiveDrawer extends React.Component {
       <div>
         <List>
           <ResponsiveDrawerListItem
-            to=""
+            to="/"
             onClick={this.closeDrawerNav}
             icon={<InfoIcon />}
             text="ホーム"
@@ -189,7 +193,7 @@ class ResponsiveDrawer extends React.Component {
         </List>
         <List>
           <ResponsiveDrawerListItem
-            to="postslist"
+            to="/postslist"
             onClick={this.closeDrawerNav}
             icon={<InfoIcon />}
             text="テーマ一覧"
@@ -197,7 +201,7 @@ class ResponsiveDrawer extends React.Component {
         </List>
         <List>
           <ResponsiveDrawerListItem
-            to="create"
+            to="/create"
             onClick={this.closeDrawerNav}
             icon={<InfoIcon />}
             text="テーマを投稿する"
@@ -205,7 +209,7 @@ class ResponsiveDrawer extends React.Component {
         </List>
         <List>
           <ResponsiveDrawerListItem
-            to="search"
+            to="/search"
             onClick={this.closeDrawerNav}
             icon={<InfoIcon />}
             text="テーマを検索する"
@@ -215,7 +219,7 @@ class ResponsiveDrawer extends React.Component {
         <Divider />
         <List>
           <ResponsiveDrawerListItem
-            to="info"
+            to="/info"
             onClick={this.closeDrawerNav}
             icon={<InfoIcon />}
             text="スキライズムとは"

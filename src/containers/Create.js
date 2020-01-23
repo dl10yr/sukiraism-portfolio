@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { startSubmit, stopSubmit, reset } from 'redux-form';
 
 import * as actions from '../actions';
 
@@ -13,18 +14,14 @@ class Create extends React.Component {
     this.state = {
       postSuccess: false,
     }
-  }
-  submit = values => {
-    const data = {
-      content: values.notes,
-      user_id: 1
-    }
-    axios.post(process.env.REACT_APP_API_URL + '/api/v1/posts', data)
+    this.submitPost = this.submitPost.bind(this);
   }
 
-  submitPost = values => {
+  submitPost() {
     const { CurrentUserReducer } = this.props;
-    var value_content = values.notes
+    const { form } = this.props;
+
+    var value_content = form.CreateForm.values.notes
     var send_content = value_content.replace(/\r?\n/g, "");
 
     const data = {
@@ -43,11 +40,11 @@ class Create extends React.Component {
       }
     })
       .then(() => {
+        console.log("aaa")
+        this.props.formreset()
       })
       .catch(() => {
-        values.notes = value_content
       })
-    values.notes = ""
 
   }
 
@@ -66,12 +63,16 @@ class Create extends React.Component {
 }
 
 const mapState = (state, ownProps) => ({
-  CurrentUserReducer: state.CurrentUserReducer
+  CurrentUserReducer: state.CurrentUserReducer,
+  form: state.form,
 });
 
 function mapDispatch(dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch),
+    formreset: bindActionCreators(() => {
+      dispatch(reset('CreateForm'))
+    })
   };
 }
 

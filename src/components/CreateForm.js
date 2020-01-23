@@ -3,10 +3,23 @@ import { Field, reduxForm } from 'redux-form'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios'
+import { SubmissionError } from 'redux-form';
+
 
 const useStyles = makeStyles(theme => ({
   button: {
-    margin: theme.spacing(1),
+    padding: '0px',
+    margin: '10px',
+    padding: '10px',
+    width: '50%',
+    height: '20%',
+    textAlign: 'center',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    fontSize: 'x-large',
+    color: 'whitesmoke',
+    background: 'rgb(2, 109, 82)',
   },
   field: {
     width: '80%',
@@ -69,7 +82,7 @@ const CreateForm = props => {
         />
       </div>
       <div>
-        <Button
+        <button
           variant="contained"
           color="primary"
           type="submit"
@@ -77,7 +90,7 @@ const CreateForm = props => {
         //endIcon={<Icon>send</Icon>}
         >
           Send
-      </Button>
+      </button>
       </div>
     </form>
   )

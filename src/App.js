@@ -10,6 +10,9 @@ import PostsList from './containers/PostsList';
 import PostsDetail from './containers/PostDetail';
 import UserDetail from './containers/UserDetail';
 import Search from './containers/Search';
+import Logout from './containers/Logout';
+import DeleteAccount from './containers/DeleteAccount';
+
 
 
 import ResponsiveDrawer from './containers/ResponsiveDrawer';
@@ -36,6 +39,8 @@ class App extends Component {
                 <Route exact path="/posts/:id" component={PostsDetail} />
                 <Route exact path="/users/:user_name" component={UserDetail} />
                 <Route exact path="/search" component={Search} />
+                <Route exact path="/logout" component={Logout} />
+                <Route exact path="/deleteaccount" component={DeleteAccount} />
 
               </Switch>
             </Auth>
