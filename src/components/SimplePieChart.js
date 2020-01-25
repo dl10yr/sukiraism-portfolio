@@ -34,16 +34,16 @@ export default class SimplePieChart extends PureComponent {
       { name: 'キライ', value: kirai_percent },
     ];
     return (
-      <PieChart width={300} height={300}>
+      <PieChart width={200} height={200}>
         <Pie
           startAngle={90}
           endAngle={-270}
           data={data}
-          cx={120}
-          cy={120}
+          cx={100}
+          cy={100}
           labelLine={false}
           label={renderCustomizedLabel}
-          outerRadius={100}
+          outerRadius={80}
           fill="#8884d8"
           dataKey="value"
         >

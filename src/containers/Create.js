@@ -40,10 +40,12 @@ class Create extends React.Component {
       }
     })
       .then(() => {
-        console.log("aaa")
-        this.props.formreset()
+
+        this.props.actions.setNotification('success', '送信に成功しました');
+        this.props.formreset();
       })
       .catch(() => {
+        this.props.actions.setNotification('error', '送信に失敗しました');
       })
 
   }
@@ -55,7 +57,7 @@ class Create extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <h3>テーマを投稿する</h3>
+        <h3> テーマを投稿する</h3>
         <CreateForm onSubmit={this.submitPost} />
       </div>
     )
@@ -70,9 +72,7 @@ const mapState = (state, ownProps) => ({
 function mapDispatch(dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch),
-    formreset: bindActionCreators(() => {
-      dispatch(reset('CreateForm'))
-    })
+    formreset: () => dispatch(reset('CreateForm')),
   };
 }
 

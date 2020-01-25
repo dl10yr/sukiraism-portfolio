@@ -6,7 +6,7 @@ const initialState = {
   page_length: "",
   noResults: false,
   searchWord: "",
-  doneFetch: false,
+  doneFetch: 0,
 };
 
 const SearchResultsReducer = (state = initialState, action) => {
@@ -18,31 +18,40 @@ const SearchResultsReducer = (state = initialState, action) => {
 
       };
     case 'GET_SEARCHRESULTS_SUCCESS':
-      if (action.items.length === 0) {
+      if (action.doneFetch === 0) {
         return {
-          ...state,
-          isFetching: false,
+          doneFetch: action.doneFetch + 1,
+          offset: 0,
           items: action.items,
-          offset: action.offset,
-          page_length: action.page_length,
-          noResults: true,
-          searchWord: action.searchWord,
-          doneFetch: action.doneFetch,
-          searchWord: action.searchWord,
-        };
+        }
       } else {
-        return {
-          ...state,
-          isFetching: false,
-          items: action.items,
-          offset: action.offset,
-          page_length: action.page_length,
-          noResults: false,
-          doneFetch: action.doneFetch,
-          searchWord: action.searchWord,
+        if (action.items.length === 0) {
+          return {
+            ...state,
+            isFetching: false,
+            items: action.items,
+            offset: action.offset,
+            page_length: action.page_length,
+            noResults: true,
+            searchWord: action.searchWord,
+            doneFetch: action.doneFetch + 1,
+            searchWord: action.searchWord,
+          };
+        } else {
+          return {
+            ...state,
+            isFetching: false,
+            items: action.items,
+            offset: action.offset,
+            page_length: action.page_length,
+            noResults: false,
+            doneFetch: action.doneFetch + 1,
+            searchWord: action.searchWord,
 
-        };
+          };
+        }
       }
+
 
     case 'GET_SEARCHRESULTS_FAILURE':
       return {

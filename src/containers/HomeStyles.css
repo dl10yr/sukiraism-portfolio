@@ -162,33 +162,37 @@ h2 {
   padding: 10px;
   width: 50%;
   height: 10%;
-  box-shadow: 0px 2px 7px 0px #ccc;
+  border-radius: 5px;
 	text-align: center;
   text-decoration: none;
+  border-width: 0;
   font-weight: bold;
   font-size: x-large;
-  color: whitesmoke;
-  background: rgb(2, 109, 82);
+  color: rgb(255, 255, 255);
+  background: #2dd57a;
 }
 
 .reload-btn:active {
 	cursor: pointer;
 	text-decoration: none;
-  background: rgb(10, 90, 50);
+  background: rgb(83, 112, 24);
   outline: 0;
 }
 
 
 .suki-btn {
-  background: rgb(200, 0, 0);
-  box-shadow: 0px 2px 7px 0px #ccc;
+  background: #F92672;
+  border-width: 0;
+  border-radius: 5px;
+
   outline: 0;
 
 }
 
 .kirai-btn {
-  background: rgb(0, 0, 200);
-  box-shadow: 0px 2px 7px 0px #ccc;
+  background: #66D9EF;
+  border-width: 0;
+  border-radius: 5px;
 
   outline: 0;
 

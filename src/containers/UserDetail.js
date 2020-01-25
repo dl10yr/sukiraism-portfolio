@@ -2,15 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel'
+
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import FolderIcon from '@material-ui/icons/Folder';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -25,6 +21,10 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
 import axios from 'axios';
 import _ from 'lodash';
+
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 const styles = theme => ({
   root: {
@@ -101,6 +101,9 @@ const styles = theme => ({
     margin: '0',
     textDecoration: 'none',
     border: '1px solid #c0c0c0',
+    textAlign: 'left',
+
+    backgroundColor: theme.palette.background.paper,
     listStyleType: 'none',
   },
   licontent: {
@@ -112,12 +115,56 @@ const styles = theme => ({
   },
   link: {
     textDecoration: 'none',
-    color: '#000000'
+    color: theme.palette.text.primary,
+
   },
   lih3: {
     margin: '7px',
     wordWrap: 'break-word'
   },
+  formControlLabel: {
+    color: theme.palette.text.primary,
+  },
+  radio: {
+    color: theme.palette.text.primary,
+  },
+  tabs: {
+    borderBottom: '1px solid #e8e8e8',
+  },
+  indicator: {
+    backgroundColor: theme.palette.text.primary
+  },
+  tab: {
+    color: theme.palette.text.primary,
+    '&$selected': {
+      color: '#F92672',
+    },
+    '&:hover': {
+      color: '#F92672',
+      opacity: 1,
+    }
+  },
+  tab1: {
+    color: theme.palette.text.primary,
+    '&$selected': {
+      color: '#66D9EF',
+    },
+    '&:hover': {
+      color: '#66D9EF',
+      opacity: 1,
+    }
+  },
+  tab2: {
+    color: theme.palette.text.primary,
+    '&$selected': {
+      color: '#2dd57a;',
+    },
+    '&:hover': {
+      color: '#2dd57a;',
+      opacity: 1,
+    }
+  },
+  selected: {}
 });
 const pagitheme = createMuiTheme();
 
@@ -169,12 +216,12 @@ class UserDetail extends React.Component {
     }
   }
 
-  handleChange(e) {
-    if (e.target.value === "スキ") {
+  handleChange(e, newvalue) {
+    if (newvalue === "スキ") {
       this.props.actions.getUserPostsList("answered_suki", this.props.match.params.user_name, 0, "スキ")
-    } else if (e.target.value === "キライ") {
+    } else if (newvalue === "キライ") {
       this.props.actions.getUserPostsList("answered_kirai", this.props.match.params.user_name, 0, "キライ")
-    } else if (e.target.value === "投稿済") {
+    } else if (newvalue === "投稿済") {
       this.props.actions.getUserPostsList("user", this.props.match.params.user_name, 0, "投稿済")
     }
   }
@@ -212,29 +259,33 @@ class UserDetail extends React.Component {
           </Typography>
           </Paper>
 
-          <FormControl component="fieldset">
-            <FormLabel component="legend"></FormLabel>
-            <RadioGroup aria-label="position" name="position" value={UserPostsListReducer.selected} onChange={this.handleChange} row>
-              <FormControlLabel
-                value="スキ"
-                control={<Radio color="primary" />}
-                label="スキ"
-                labelPlacement="end"
-              />
-              <FormControlLabel
-                value="キライ"
-                control={<Radio color="primary" />}
-                label="キライ"
-                labelPlacement="end"
-              />
-              <FormControlLabel
-                value="投稿済"
-                control={<Radio color="primary" />}
-                label="投稿済"
-                labelPlacement="end"
-              />
-            </RadioGroup>
-          </FormControl>
+          <div>
+            <Tabs
+              classes={{
+                root: classes.tabs,
+                indicator: classes.indicator,
+              }}
+              value={UserPostsListReducer.selected} variant="fullWidth" onChange={this.handleChange} aria-label="simple tabs example">
+              <Tab
+                classes={{
+                  root: classes.tab,
+                  selected: classes.selected,
+                }} selected
+                icon={<ThumbUpIcon />} value="スキ" />
+              <Tab
+                classes={{
+                  root: classes.tab1,
+                  selected: classes.selected,
+                }} selected
+                icon={<ThumbDownIcon />} value="キライ" />
+              <Tab
+                classes={{
+                  root: classes.tab2,
+                  selected: classes.selected,
+                }} selected
+                icon={<FolderIcon />} value="投稿済" />
+            </Tabs>
+          </div>
 
           <ul className={classes.ul}>
             {UserPostsListReducer.items.map((post) => (
@@ -257,7 +308,7 @@ class UserDetail extends React.Component {
             />
           </MuiThemeProvider>
         </div>
-      </Scrollbars>
+      </Scrollbars >
 
     );
 

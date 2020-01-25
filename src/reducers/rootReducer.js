@@ -4,8 +4,7 @@ import { routerReducer } from 'react-router-redux'
 import CurrentUserReducer from './CurrentUserReducer'
 import PostsListReducer from './PostsListReducer'
 import UserPostsListReducer from './UserPostsListReducer'
-
-
+import NotificationReducer from './NotificationReducer'
 import SearchResultsReducer from './SearchResultsReducer'
 
 const rootReducer = combineReducers({
@@ -14,6 +13,7 @@ const rootReducer = combineReducers({
   router: routerReducer,
   PostsListReducer,
   UserPostsListReducer,
+  NotificationReducer,
   SearchResultsReducer
 })
 

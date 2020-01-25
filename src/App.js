@@ -13,19 +13,32 @@ import Search from './containers/Search';
 import Logout from './containers/Logout';
 import DeleteAccount from './containers/DeleteAccount';
 
-
+import Notification from './containers/Notification';
 
 import ResponsiveDrawer from './containers/ResponsiveDrawer';
 import RouteRelatedBottomNavigation from './containers/RouteRelatedBottomNavigation';
 
 
 
+import { withStyles } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import "normalize.css";
+import "./App.css";
+
+
+const styles = theme => ({
+
+  h3: {
+    color: theme.palette.text.primary,
+
+  },
+});
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <Notification />
         <ResponsiveDrawer className="ResponsiveDrawer">
           <Switch>
             <Route path="/login" component={Login} />
@@ -52,4 +65,6 @@ class App extends Component {
   }
 }
 
-export default App;
+export default (
+  withStyles(styles, { withTheme: true })(App)
+);

@@ -14,8 +14,6 @@ import axios from 'axios';
 
 import Cards, { Card } from 'react-swipe-card-chsstm';
 
-import "normalize.css";
-//import "./styles.css";
 
 const styles = theme => ({
 

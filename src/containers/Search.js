@@ -53,6 +53,10 @@ const styles = theme => ({
     wordWrap: 'break-word',
     textAlign: 'left'
   },
+  h3: {
+    color: theme.palette.text.primary,
+
+  },
 });
 
 class SearchPage extends React.Component {
@@ -83,21 +87,33 @@ class SearchPage extends React.Component {
     const { SearchResultsReducer } = this.props;
     const { classes } = this.props;
 
-    if (!noResults && doneFetch) {
+    if (!noResults && doneFetch > 1) {
       return (
-        <ul className={classes.ul}>
-          {SearchResultsReducer.items.map((post) => (
-            <Link className={classes.link} to={"/posts/" + post.id}>
-              <li className={classes.li} key={post.id}>
-                <div className={classes.licontent}>
-                  <h3 className={classes.lih3}>{post.content}</h3>
-                </div>
-              </li>
-            </Link>
-          ))}
-        </ul>
+        <div>
+          <ul className={classes.ul}>
+            {SearchResultsReducer.items.map((post) => (
+              <Link className={classes.link} to={"/posts/" + post.id}>
+                <li className={classes.li} key={post.id}>
+                  <div className={classes.licontent}>
+                    <h3 className={classes.lih3}>{post.content}</h3>
+                  </div>
+                </li>
+              </Link>
+            ))}
+          </ul>
+          <MuiThemeProvider theme={pagitheme}>
+            <CssBaseline />
+            <Pagination
+              limit={10}
+              offset={SearchResultsReducer.offset}
+              total={SearchResultsReducer.page_length * 10}
+              onClick={(e, offset) => this.handlePaginationClick(offset)}
+            />
+          </MuiThemeProvider>
+        </div>
+
       )
-    } else if (!doneFetch) {
+    } else if (doneFetch === 1) {
       return (
         <h3>検索ワードを入力してください</h3>
       )
@@ -116,19 +132,11 @@ class SearchPage extends React.Component {
 
     return (
       <div>
-        <h3>テーマを検索する</h3>
+        <h3 className={classes.h3}>テーマを検索する</h3>
         <SearchForm onSubmit={this.searchPost} />
 
         {this.renderResults(SearchResultsReducer.noResults, SearchResultsReducer.doneFetch)}
-        <MuiThemeProvider theme={pagitheme}>
-          <CssBaseline />
-          <Pagination
-            limit={10}
-            offset={SearchResultsReducer.offset}
-            total={SearchResultsReducer.page_length * 10}
-            onClick={(e, offset) => this.handlePaginationClick(offset)}
-          />
-        </MuiThemeProvider>
+
       </div>
     )
 

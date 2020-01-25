@@ -19,7 +19,10 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 'bold',
     fontSize: 'x-large',
     color: 'whitesmoke',
-    background: 'rgb(2, 109, 82)',
+    background: '#2dd57a',
+    borderRadius: '5px',
+    borderWidth: '0',
+
   },
   field: {
     width: '80%',
@@ -99,4 +102,5 @@ const CreateForm = props => {
 export default reduxForm({
   form: 'CreateForm', // a unique identifier for this form
   validate,
+  destroyOnUnmount: false,
 })(CreateForm)

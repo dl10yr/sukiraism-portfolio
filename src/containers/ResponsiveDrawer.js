@@ -28,6 +28,8 @@ import { bindActionCreators } from 'redux';
 
 import * as actions from '../actions';
 
+import titlepng from '../images/title.png';
+
 const drawerWidth = 240;
 const headerNavigationHeight = 56;
 const bottomNavigationHeight = 56;
@@ -48,6 +50,7 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${drawerWidth}px)`,
     },
+    backgroundColor: theme.palette.secondary.light,
   },
   toolBar: {
     justifyContent: 'space-between',
@@ -253,7 +256,7 @@ class ResponsiveDrawer extends React.Component {
             </IconButton>
             <Link to="/">
               {/* <img src={titlepng} width="150px" alt="title_logo" className={classes.headerLogo} /> */}
-              <img src="#" width="150px" alt="title_logo" className={classes.headerLogo} />
+              <img src={titlepng} width="150px" alt="title_logo" className={classes.headerLogo} />
             </Link>
             {this.renderUserlink()}
           </Toolbar>

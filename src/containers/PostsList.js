@@ -13,6 +13,14 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel'
+import { palette } from '@material-ui/system';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import UpdateIcon from '@material-ui/icons/Update';
+import PeopleIcon from '@material-ui/icons/People';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import "normalize.css";
+
 
 const styles = theme => ({
   root: {
@@ -30,8 +38,10 @@ const styles = theme => ({
     cursor: 'pointer',
     margin: '0',
     textDecoration: 'none',
-    border: '1px solid #c0c0c0',
+    border: '0.3px solid #c0c0c0',
     listStyleType: 'none',
+    backgroundColor: theme.palette.background.paper,
+    textAlign: 'left',
   },
   licontent: {
     display: 'inline-block',
@@ -42,8 +52,8 @@ const styles = theme => ({
   },
   link: {
     textDecoration: 'none',
-    color: '#000000',
-    textAlign: 'left',
+    color: theme.palette.text.primary,
+
   },
   lih3: {
     margin: '7px',
@@ -52,7 +62,31 @@ const styles = theme => ({
   },
   container: {
     margin: '10px'
-  }
+  },
+  formControlLabel: {
+    color: theme.palette.text.primary,
+  },
+  radio: {
+    color: theme.palette.text.primary,
+  },
+  tabs: {
+    borderBottom: '1px solid #e8e8e8',
+  },
+  indicator: {
+    backgroundColor: theme.palette.text.primary
+  },
+
+  tab: {
+    color: theme.palette.text.primary,
+    '&$selected': {
+      color: '#2dd57a;',
+    },
+    '&:hover': {
+      color: '#2dd57a;',
+      opacity: 1,
+    }
+  },
+  selected: {}
 });
 
 const pagitheme = createMuiTheme();
@@ -76,13 +110,13 @@ class PostsList extends React.Component {
     }
   }
 
-  handleChange(e) {
-    if (e.target.value === "新着順") {
+  handleChange(e, newvalue) {
+    if (newvalue === "新着順") {
       this.props.actions.getPostsList("", 0, "新着順")
-    } else if (e.target.value === "スキが多い順") {
+    } else if (newvalue === "スキが多い順") {
       this.props.actions.getPostsList("_suki", 0, "スキが多い順")
 
-    } else if (e.target.value === "投票数が多い順") {
+    } else if (newvalue === "投票数が多い順") {
       this.props.actions.getPostsList("_allcount", 0, "投票数が多い順")
     }
   }
@@ -100,35 +134,38 @@ class PostsList extends React.Component {
   render() {
     const { CurrentUserReducer } = this.props;
     const { PostsListReducer } = this.props;
-
     const { classes } = this.props;
 
     return (
       <Scrollbars>
         <div className={classes.container}>
-          <FormControl component="fieldset">
-            <FormLabel component="legend"></FormLabel>
-            <RadioGroup aria-label="position" name="position" value={PostsListReducer.selected} onChange={this.handleChange} row>
-              <FormControlLabel
-                value="新着順"
-                control={<Radio color="primary" />}
-                label="新着順"
-                labelPlacement="end"
-              />
-              <FormControlLabel
-                value="スキが多い順"
-                control={<Radio color="primary" />}
-                label="スキが多い順"
-                labelPlacement="end"
-              />
-              <FormControlLabel
-                value="投票数が多い順"
-                control={<Radio color="primary" />}
-                label="投票数が多い順"
-                labelPlacement="end"
-              />
-            </RadioGroup>
-          </FormControl>
+          <div>
+            <Tabs
+              classes={{
+                root: classes.tabs,
+                indicator: classes.indicator,
+              }}
+              value={PostsListReducer.selected} variant="fullWidth" onChange={this.handleChange} aria-label="simple tabs example">
+              <Tab
+                classes={{
+                  root: classes.tab,
+                  selected: classes.selected,
+                }} selected
+                icon={<UpdateIcon />} value="新着順" />
+              <Tab
+                classes={{
+                  root: classes.tab,
+                  selected: classes.selected,
+                }} selected
+                icon={<ThumbUpIcon />} value="スキが多い順" />
+              <Tab
+                classes={{
+                  root: classes.tab,
+                  selected: classes.selected,
+                }} selected
+                icon={<PeopleIcon />} value="投票数が多い順" />
+            </Tabs>
+          </div>
 
           <ul className={classes.ul}>
             {PostsListReducer.items.map((post) => (

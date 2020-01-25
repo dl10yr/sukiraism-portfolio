@@ -153,3 +153,12 @@ export const getSearchResultsFailure = (error, keyword, doneFetch) => ({
   doneFetch: doneFetch,
 
 })
+
+export const setNotification = (variant, message) => ({
+  type: 'SET_NOTIFICATION',
+  variant: variant,
+  message: message,
+});
+export const closeNotification = (variant, message) => ({
+  type: 'CLOSE_NOTIFICATION',
+});

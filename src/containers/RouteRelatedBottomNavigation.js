@@ -23,8 +23,16 @@ const styles = theme => ({
   root: {
     [theme.breakpoints.up('md')]: {
       display: 'none',
+
     },
+    '&$selected': {
+      paddingTop: 6,
+      color: '#2dd57a;',
+    },
+    color: theme.palette.primary.light,
+    backgroundColor: theme.palette.secondary.light,
   },
+  selected: {},
   button: {
     maxWidth: '100%',
   },
@@ -43,7 +51,10 @@ class RouteRelatedBottomNavigation extends React.Component {
       <BottomNavigationAction
         value={button_info.link_to}
         label={button_info.label}
-        className={this.props.classes.button}
+        classes={{
+          root: this.props.classes.root,
+          selected: this.props.classes.selected,
+        }}
         icon={button_info.icon}
         component={Link}
         to={button_info.link_to}
@@ -58,7 +69,10 @@ class RouteRelatedBottomNavigation extends React.Component {
         <BottomNavigation
           value={this.props.location.pathname}
           showLabels
-          className={classes.root}
+          classes={{
+            root: classes.root,
+            selected: classes.selected,
+          }}
           children={this.buttons}
         />
       </div>
