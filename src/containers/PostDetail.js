@@ -44,6 +44,21 @@ const styles = theme => ({
   }
 });
 
+const CustomButton = (props) => {
+  const customTheme = theme => ({
+    root: {
+      color: theme.palette.getContrastText(props.themeColor),
+      backgroundColor: props.themeColor,
+      '&:hover': {
+        backgroundColor: props.themeColor,
+        boxShadow: `0 3px 5px 2px ${props.themeColor}`,
+      },
+    },
+  })
+  const ComponentName = withStyles(customTheme)(Button)
+  return <ComponentName {...props} />
+}
+
 class PostsDetail extends React.Component {
 
   constructor(props) {
@@ -109,7 +124,7 @@ class PostsDetail extends React.Component {
             {this.state.content}
           </Typography>
           <Typography component="p" style={{ fontWeight: 'bold' }}>
-            created by {this.state.username}
+            posted by {this.state.username}
           </Typography>
           <PieChart suki_percent={this.state.suki_percent} kirai_percent={this.state.kirai_percent} />
           <Typography component="p" style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>

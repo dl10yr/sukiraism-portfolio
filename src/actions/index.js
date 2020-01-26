@@ -39,7 +39,7 @@ export const getPostsList = (fetchlink, offset, selected) => {
     const auth_token = localStorage.auth_token
     const client_id = localStorage.client_id
     const uid = localStorage.uid
-    const page_url = offset / 10 + 1
+    const page_url = offset / 20 + 1
 
     return axios.get(process.env.REACT_APP_API_URL + `/api/v1/posts${fetchlink}?page=${page_url}`, {
       headers: {
@@ -78,7 +78,7 @@ export const getUserPostsList = (fetchlink, user_nickname, offset, selected) => 
     const auth_token = localStorage.auth_token
     const client_id = localStorage.client_id
     const uid = localStorage.uid
-    const page_url = offset / 10 + 1
+    const page_url = offset / 20 + 1
 
     return axios.get(process.env.REACT_APP_API_URL + `/api/v1/users/${fetchlink}_posts/${user_nickname}?page=${page_url}`, {
       headers: {
@@ -118,7 +118,7 @@ export const getSearchResults = (keyword, offset, doneFetch) => {
     const auth_token = localStorage.auth_token
     const client_id = localStorage.client_id
     const uid = localStorage.uid
-    const page_url = offset / 10 + 1
+    const page_url = offset / 20 + 1
 
     return axios.get(process.env.REACT_APP_API_URL + `/api/v1/search?q=${keyword}&page=${page_url}`, {
       headers: {

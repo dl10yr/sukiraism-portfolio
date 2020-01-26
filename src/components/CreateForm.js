@@ -27,6 +27,14 @@ const useStyles = makeStyles(theme => ({
   field: {
     width: '80%',
     height: '200px',
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: '#2dd57a;',
+      },
+      '&.Mui-error fieldset': {
+        borderColor: 'red',
+      },
+    },
   }
 }));
 
@@ -72,12 +80,12 @@ const CreateForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props
   const classes = useStyles();
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} >
       <div>
         <Field
           name="notes"
           component={renderTextField}
-          className={classes.field}
+          classes={{ root: classes.field, focused: classes.focused }}
           label=""
           multiline
           rowsMax="7"

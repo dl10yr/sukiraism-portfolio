@@ -6,8 +6,13 @@ import { bindActionCreators } from 'redux';
 
 import * as actions from '../actions';
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import Typography from '@material-ui/core/Typography';
+
 
 const styles = theme => ({
+  contianer: {
+    margin: '10px'
+  },
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -52,8 +57,10 @@ class Logout extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
-        <h3>ログアウトしますか？</h3>
+      <div className={classes.container}>
+        <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold', marginBottom: '30px' }}>
+          ログアウトしますか？
+        </Typography>
         <Button variant="contained" size="large" color="secondary" className={classes.button} onClick={this.Logout}>
           する
         </Button>

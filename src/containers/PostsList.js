@@ -5,21 +5,19 @@ import * as actions from '../actions';
 import { withStyles } from '@material-ui/core/styles';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Link } from 'react-router-dom';
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+
 import Pagination from "material-ui-flat-pagination";
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel'
-import { palette } from '@material-ui/system';
+
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import UpdateIcon from '@material-ui/icons/Update';
 import PeopleIcon from '@material-ui/icons/People';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import "normalize.css";
+import { Typography } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import Moment from 'react-moment';
+
 
 
 const styles = theme => ({
@@ -30,23 +28,25 @@ const styles = theme => ({
   },
   ul: {
     listStyle: 'none',
-    margin: 'auto',
+    margin: '10px auto',
     padding: '0px 10px',
-    textDecoration: 'none'
+    textDecoration: 'none',
+    height: '100%',
   },
   li: {
     cursor: 'pointer',
     margin: '0',
     textDecoration: 'none',
-    border: '0.3px solid #c0c0c0',
+    border: 'thin solid whitesmoke',
     listStyleType: 'none',
     backgroundColor: theme.palette.background.paper,
     textAlign: 'left',
+    padding: "10px"
   },
   licontent: {
     display: 'inline-block',
     verticalAlign: 'top',
-    maxWidth: '75%',
+    width: '100%',
     margin: '0',
     textDecoration: 'none'
   },
@@ -55,13 +55,23 @@ const styles = theme => ({
     color: theme.palette.text.primary,
 
   },
-  lih3: {
-    margin: '7px',
+  libody: {
+    margin: '3px',
     wordWrap: 'break-word',
-    textAlign: 'left'
+    float: 'left',
+    display: 'table-cell',
+    width: '100%',
+    textAlign: 'left',
+    fontWeight: 'bold'
+  },
+  subtitle2: {
+    display: 'table-cell',
+
+    float: 'right',
   },
   container: {
-    margin: '10px'
+    margin: '10px',
+    width: '95%'
   },
   formControlLabel: {
     color: theme.palette.text.primary,
@@ -86,10 +96,38 @@ const styles = theme => ({
       opacity: 1,
     }
   },
-  selected: {}
+  selected: {},
+  pagiroot: {
+    textAlign: 'center',
+    marginTop: "10px",
+    color: theme.palette.text.primary
+  },
+  pageNaviCurrent: {
+    cursor: 'default',
+    color: '#2dd57a;',
+    '&:hover': {
+      backgroundColor: '#2dd57a;',
+      opacity: 1,
+    }
+  },
+  pageNaviText: {
+  },
+  pageNaviStandard: {
+    color: theme.palette.text.primary,
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)'
+    }
+  },
+  pageNaviArrow: {
+    color: theme.palette.text.primary,
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)'
+    }
+  }
 });
 
-const pagitheme = createMuiTheme();
+
+
 
 class PostsList extends React.Component {
   constructor(props) {
@@ -105,8 +143,8 @@ class PostsList extends React.Component {
       this.props.actions.getPostsList("", PostsListReducer.offset, "新着順")
     } else if (PostsListReducer.selected === "スキが多い順") {
       this.props.actions.getPostsList("_suki", PostsListReducer.offset, "スキが多い順")
-    } else if (PostsListReducer.selected === "投票数が多い順") {
-      this.props.actions.getPostsList("_allcount", PostsListReducer.offset, "投票数が多い順")
+    } else if (PostsListReducer.selected === "投票が多い順") {
+      this.props.actions.getPostsList("_allcount", PostsListReducer.offset, "投票が多い順")
     }
   }
 
@@ -116,8 +154,8 @@ class PostsList extends React.Component {
     } else if (newvalue === "スキが多い順") {
       this.props.actions.getPostsList("_suki", 0, "スキが多い順")
 
-    } else if (newvalue === "投票数が多い順") {
-      this.props.actions.getPostsList("_allcount", 0, "投票数が多い順")
+    } else if (newvalue === "投票が多い順") {
+      this.props.actions.getPostsList("_allcount", 0, "投票が多い順")
     }
   }
 
@@ -127,18 +165,91 @@ class PostsList extends React.Component {
       this.props.actions.getPostsList("", offset, "新着順")
     } else if (PostsListReducer.selected === "スキが多い順") {
       this.props.actions.getPostsList("_suki", offset, "スキが多い順")
-    } else if (PostsListReducer.selected === "投票数が多い順") {
-      this.props.actions.getPostsList("_allcount", offset, "投票数が多い順")
+    } else if (PostsListReducer.selected === "投票が多い順") {
+      this.props.actions.getPostsList("_allcount", offset, "投票が多い順")
     }
   }
+
+  renderInfo() {
+    const { PostsListReducer } = this.props;
+    const { classes } = this.props;
+
+    if (PostsListReducer.selected === "新着順") {
+      return (
+        <ul className={classes.ul}>
+          {PostsListReducer.items.map((post) => (
+            <Link to={"/posts/" + post.id} className={classes.link}>
+              <li className={classes.li} key={post.id}>
+                <div className={classes.licontent}>
+                  <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
+                    {post.content}
+                  </Typography>
+                  <Typography variant="subtitle2" component="subtitle2" color="textPrimary" className={classes.subtitle2} >
+                    <Moment fromNow>{post.created_at}</Moment>
+                  </Typography>
+                </div>
+              </li>
+            </Link>
+          ))}
+        </ul>
+      )
+    } else if (PostsListReducer.selected === "スキが多い順") {
+      return (
+        <ul className={classes.ul}>
+          {PostsListReducer.items.map((post) => (
+            <Link to={"/posts/" + post.id} className={classes.link}>
+              <li className={classes.li} key={post.id}>
+                <div className={classes.licontent}>
+                  <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
+                    {post.content}
+                  </Typography>
+                  <Typography variant="subtitle2" component="subtitle2" color="textPrimary" className={classes.subtitle2} >
+                    {post.suki_percent}%
+                  </Typography>
+                </div>
+              </li>
+            </Link>
+          ))}
+        </ul>
+      )
+    } else if (PostsListReducer.selected === "投票が多い順") {
+      return (
+        <ul className={classes.ul}>
+          {PostsListReducer.items.map((post) => (
+            <Link to={"/posts/" + post.id} className={classes.link}>
+              <li className={classes.li} key={post.id}>
+                <div className={classes.licontent}>
+                  <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
+                    {post.content}
+                  </Typography>
+                  <Typography variant="subtitle2" component="subtitle2" color="textPrimary" className={classes.subtitle2} >
+                    {post.all_count}票
+                  </Typography>
+                </div>
+              </li>
+            </Link>
+          ))}
+        </ul>
+      )
+    }
+  }
+
   render() {
     const { CurrentUserReducer } = this.props;
     const { PostsListReducer } = this.props;
     const { classes } = this.props;
+    const { pagiclasses } = this.props;
+
 
     return (
       <Scrollbars>
         <div className={classes.container}>
+          <Paper>
+            <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold', padding: '5px' }}>
+              テーマ一覧: {PostsListReducer.selected}
+            </Typography>
+          </Paper>
+
           <div>
             <Tabs
               classes={{
@@ -163,30 +274,27 @@ class PostsList extends React.Component {
                   root: classes.tab,
                   selected: classes.selected,
                 }} selected
-                icon={<PeopleIcon />} value="投票数が多い順" />
+                icon={<PeopleIcon />} value="投票が多い順" />
             </Tabs>
           </div>
 
-          <ul className={classes.ul}>
-            {PostsListReducer.items.map((post) => (
-              <Link to={"/posts/" + post.id} className={classes.link}>
-                <li className={classes.li} key={post.id}>
-                  <div className={classes.licontent}>
-                    <h3 className={classes.lih3}>{post.content}</h3>
-                  </div>
-                </li>
-              </Link>
-            ))}
-          </ul>
-          <MuiThemeProvider theme={pagitheme}>
-            <CssBaseline />
-            <Pagination
-              limit={10}
-              offset={PostsListReducer.offset}
-              total={PostsListReducer.page_length * 10}
-              onClick={(e, offset) => this.handlePaginationClick(offset)}
-            />
-          </MuiThemeProvider>
+          {this.renderInfo()}
+
+          <Pagination
+            limit={20}
+            offset={PostsListReducer.offset}
+            total={PostsListReducer.page_length * 20}
+            onClick={(e, offset) => this.handlePaginationClick(offset)}
+            className={classes.pagiroot}
+            classes={{
+              root: classes.pageNav,
+              rootStandard: classes.pageNaviStandard,
+              rootCurrent: classes.pageNaviCurrent,
+              rootEnd: classes.pageNaviArrow,
+              text: classes.pageNaviText
+            }}
+          />
+
         </div>
       </Scrollbars>
     )

@@ -1,12 +1,21 @@
 import React from 'react'
 import CreateForm from '../components/CreateForm'
 import axios from 'axios'
+import { withStyles } from '@material-ui/core/styles';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { startSubmit, stopSubmit, reset } from 'redux-form';
+import Typography from '@material-ui/core/Typography';
 
 import * as actions from '../actions';
+
+
+const styles = theme => ({
+  container: {
+    margin: '10px'
+  }
+})
 
 class Create extends React.Component {
   constructor(props) {
@@ -56,8 +65,10 @@ class Create extends React.Component {
 
     const { classes } = this.props;
     return (
-      <div>
-        <h3> テーマを投稿する</h3>
+      <div className={classes.container}>
+        <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold' }}>
+          テーマの投稿
+        </Typography>
         <CreateForm onSubmit={this.submitPost} />
       </div>
     )
@@ -76,4 +87,6 @@ function mapDispatch(dispatch) {
   };
 }
 
-export default connect(mapState, mapDispatch)(Create);
+export default connect(mapState, mapDispatch)(
+  withStyles(styles, { withTheme: true })(Create)
+);

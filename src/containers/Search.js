@@ -1,13 +1,9 @@
 import React from 'react'
 import SearchForm from './SearchForm'
 
-
+import { Scrollbars } from 'react-custom-scrollbars';
 import { withStyles } from '@material-ui/core/styles';
 
-// Material-UIアイコン取得
-import Search from '@material-ui/icons/Search';
-
-// Redux関連
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -16,6 +12,9 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Pagination from "material-ui-flat-pagination";
 import { Link } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import MainButton from '../components/MainButton.js';
+
 
 const pagitheme = createMuiTheme();
 const styles = theme => ({
@@ -24,9 +23,11 @@ const styles = theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
   },
+
   ul: {
     listStyle: 'none',
     margin: 'auto',
+    marginTop: '10px',
     padding: '0px 10px',
     textDecoration: 'none'
   },
@@ -34,29 +35,110 @@ const styles = theme => ({
     cursor: 'pointer',
     margin: '0',
     textDecoration: 'none',
-    border: '1px solid #c0c0c0'
+    border: 'thin solid whitesmoke',
+    listStyleType: 'none',
+    backgroundColor: theme.palette.background.paper,
+    textAlign: 'left',
+    padding: "10px"
   },
   licontent: {
     display: 'inline-block',
     verticalAlign: 'top',
-    maxWidth: '75%',
+    width: '100%',
     margin: '0',
     textDecoration: 'none'
   },
   link: {
     textDecoration: 'none',
-    color: '#000000',
-    textAlign: 'left',
+    color: theme.palette.text.primary,
+
   },
-  lih3: {
-    margin: '7px',
+  libody: {
+    margin: '3px',
     wordWrap: 'break-word',
-    textAlign: 'left'
+    float: 'left',
+    display: 'table-cell',
+    width: '100%',
+    textAlign: 'left',
+    fontWeight: 'bold'
+  },
+  subtitle2: {
+    display: 'table-cell',
+
+    float: 'right',
+  },
+
+  tabs: {
+    borderBottom: '1px solid #e8e8e8',
+  },
+  indicator: {
+    backgroundColor: theme.palette.text.primary
+  },
+  tab: {
+    color: theme.palette.text.primary,
+    '&$selected': {
+      color: '#F92672',
+    },
+    '&:hover': {
+      color: '#F92672',
+      opacity: 1,
+    }
+  },
+  tab1: {
+    color: theme.palette.text.primary,
+    '&$selected': {
+      color: '#66D9EF',
+    },
+    '&:hover': {
+      color: '#66D9EF',
+      opacity: 1,
+    }
+  },
+  tab2: {
+    color: theme.palette.text.primary,
+    '&$selected': {
+      color: '#2dd57a;',
+    },
+    '&:hover': {
+      color: '#2dd57a;',
+      opacity: 1,
+    }
+  },
+  selected: {},
+  pagiroot: {
+    textAlign: 'center',
+    marginTop: "10px",
+    color: theme.palette.text.primary
+  },
+  pageNaviCurrent: {
+    cursor: 'default',
+    color: '#2dd57a;',
+    '&:hover': {
+      backgroundColor: '#2dd57a;',
+      opacity: 1,
+    }
+  },
+  pageNaviText: {
+  },
+  pageNaviStandard: {
+    color: theme.palette.text.primary,
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)'
+    }
+  },
+  pageNaviArrow: {
+    color: theme.palette.text.primary,
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)'
+    }
   },
   h3: {
     color: theme.palette.text.primary,
 
   },
+  container: {
+    margin: '10px'
+  }
 });
 
 class SearchPage extends React.Component {
@@ -89,38 +171,51 @@ class SearchPage extends React.Component {
 
     if (!noResults && doneFetch > 1) {
       return (
+
         <div>
           <ul className={classes.ul}>
             {SearchResultsReducer.items.map((post) => (
-              <Link className={classes.link} to={"/posts/" + post.id}>
+              <Link to={"/posts/" + post.id} className={classes.link}>
                 <li className={classes.li} key={post.id}>
                   <div className={classes.licontent}>
-                    <h3 className={classes.lih3}>{post.content}</h3>
+                    <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
+                      {post.content}
+                    </Typography>
                   </div>
                 </li>
               </Link>
             ))}
           </ul>
-          <MuiThemeProvider theme={pagitheme}>
-            <CssBaseline />
-            <Pagination
-              limit={10}
-              offset={SearchResultsReducer.offset}
-              total={SearchResultsReducer.page_length * 10}
-              onClick={(e, offset) => this.handlePaginationClick(offset)}
-            />
-          </MuiThemeProvider>
+
+          <Pagination
+            limit={20}
+            offset={SearchResultsReducer.offset}
+            total={SearchResultsReducer.page_length * 20}
+            onClick={(e, offset) => this.handlePaginationClick(offset)}
+            className={classes.pagiroot}
+            classes={{
+              root: classes.pageNav,
+              rootStandard: classes.pageNaviStandard,
+              rootCurrent: classes.pageNaviCurrent,
+              rootEnd: classes.pageNaviArrow,
+              text: classes.pageNaviText
+            }}
+          />
         </div>
 
       )
     } else if (doneFetch === 1) {
       return (
-        <h3>検索ワードを入力してください</h3>
+        <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold', marginTop: '10px' }}>
+          検索ワードを入力してください
+        </Typography>
       )
 
     } else {
       return (
-        <h3>検索結果はありません。</h3>
+        <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold', marginTop: '10px' }}>
+          検索結果はありません
+        </Typography>
       )
     }
   }
@@ -131,13 +226,17 @@ class SearchPage extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
-        <h3 className={classes.h3}>テーマを検索する</h3>
-        <SearchForm onSubmit={this.searchPost} />
+      <Scrollbars>
+        <div className={classes.container}>
+          <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold' }}>
+            テーマ検索
+        </Typography>
+          <SearchForm onSubmit={this.searchPost} />
 
-        {this.renderResults(SearchResultsReducer.noResults, SearchResultsReducer.doneFetch)}
+          {this.renderResults(SearchResultsReducer.noResults, SearchResultsReducer.doneFetch)}
 
-      </div>
+        </div>
+      </Scrollbars>
     )
 
 

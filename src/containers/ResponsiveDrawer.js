@@ -13,9 +13,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Icon from '@material-ui/core/Icon';
 
 import SettingsIcon from '@material-ui/icons/Settings';
-import InfoIcon from '@material-ui/icons/Info';
-import HomeIcon from '@material-ui/icons/Home';
 import ShareIcon from '@material-ui/icons/Share';
+
+import HomeIcon from '@material-ui/icons/Home';
+import InfoIcon from '@material-ui/icons/Info';
+import SendIcon from '@material-ui/icons/Send';
+import ViewListIcon from '@material-ui/icons/ViewList';
+import SearchIcon from '@material-ui/icons/Search';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 // import titlepng from '../images/sukiraism_title.png'
 
@@ -60,6 +65,7 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+    color: theme.palette.text.primary
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
@@ -190,7 +196,7 @@ class ResponsiveDrawer extends React.Component {
           <ResponsiveDrawerListItem
             to="/"
             onClick={this.closeDrawerNav}
-            icon={<InfoIcon />}
+            icon={<HomeIcon />}
             text="ホーム"
           />
         </List>
@@ -198,7 +204,7 @@ class ResponsiveDrawer extends React.Component {
           <ResponsiveDrawerListItem
             to="/postslist"
             onClick={this.closeDrawerNav}
-            icon={<InfoIcon />}
+            icon={<ViewListIcon />}
             text="テーマ一覧"
           />
         </List>
@@ -206,16 +212,16 @@ class ResponsiveDrawer extends React.Component {
           <ResponsiveDrawerListItem
             to="/create"
             onClick={this.closeDrawerNav}
-            icon={<InfoIcon />}
-            text="テーマを投稿する"
+            icon={<SendIcon />}
+            text="テーマ投稿"
           />
         </List>
         <List>
           <ResponsiveDrawerListItem
             to="/search"
             onClick={this.closeDrawerNav}
-            icon={<InfoIcon />}
-            text="テーマを検索する"
+            icon={<SearchIcon />}
+            text="テーマ検索"
           />
         </List>
 
@@ -232,7 +238,7 @@ class ResponsiveDrawer extends React.Component {
           <ResponsiveDrawerListItem
             to="/term"
             onClick={this.closeDrawerNav}
-            icon={<HomeIcon />}
+            icon={<AssignmentIcon />}
             text="利用規約"
           />
         </List>

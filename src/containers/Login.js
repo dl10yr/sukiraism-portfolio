@@ -17,7 +17,7 @@ class Login extends React.Component {
     return (
       <div className={classes.login}>
         <p>未ログイン</p>
-        <Button variant="contained" color="secondary" onClick={this.loginTwitter}>
+        <Button variant="contained" color="primary" onClick={this.loginTwitter}>
           Twitterで登録・ログイン
         </Button>
       </div>

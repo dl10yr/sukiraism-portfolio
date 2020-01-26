@@ -7,6 +7,10 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
+import SendIcon from '@material-ui/icons/Send';
+import SearchIcon from '@material-ui/icons/Search';
+
+import ViewListIcon from '@material-ui/icons/ViewList';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -41,9 +45,9 @@ const styles = theme => ({
 
 class RouteRelatedBottomNavigation extends React.Component {
   buttons_info = [
-    { label: 'トップページ', icon: <HomeIcon />, link_to: '/' },
-    { label: 'テーマ一覧', icon: <InfoIcon />, link_to: '/postslist' },
-    { label: '投稿', icon: <InfoIcon />, link_to: '/create' },
+    { label: '検索', icon: <SearchIcon />, link_to: '/search' },
+    { label: 'テーマ一覧', icon: <ViewListIcon />, link_to: '/postslist' },
+    { label: '投稿', icon: <SendIcon />, link_to: '/create' },
   ];
 
   buttons = this.buttons_info.map((button_info, index) => {
@@ -68,7 +72,7 @@ class RouteRelatedBottomNavigation extends React.Component {
       <div className={classes.wrapper}>
         <BottomNavigation
           value={this.props.location.pathname}
-          showLabels
+          // showLabels
           classes={{
             root: classes.root,
             selected: classes.selected,

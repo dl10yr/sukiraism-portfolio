@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import FolderIcon from '@material-ui/icons/Folder';
@@ -14,7 +13,6 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import Pagination from "material-ui-flat-pagination";
 import { Link } from 'react-router-dom';
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -22,16 +20,14 @@ import * as actions from '../actions';
 import axios from 'axios';
 import _ from 'lodash';
 
-import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 const styles = theme => ({
   root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    margin: 10,
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
   },
   textLeft: {
     textAlign: 'left',
@@ -69,6 +65,10 @@ const styles = theme => ({
   rightIcon: {
     marginLeft: theme.spacing.unit,
   },
+  container: {
+    margin: '10px',
+    width: '95%'
+  },
   buttongroup: {
     width: '100%',
     marginTop: '10px'
@@ -100,16 +100,16 @@ const styles = theme => ({
     cursor: 'pointer',
     margin: '0',
     textDecoration: 'none',
-    border: '1px solid #c0c0c0',
-    textAlign: 'left',
-
-    backgroundColor: theme.palette.background.paper,
+    border: 'thin solid whitesmoke',
     listStyleType: 'none',
+    backgroundColor: theme.palette.background.paper,
+    textAlign: 'left',
+    padding: "10px"
   },
   licontent: {
     display: 'inline-block',
     verticalAlign: 'top',
-    maxWidth: '75%',
+    width: '100%',
     margin: '0',
     textDecoration: 'none'
   },
@@ -118,16 +118,21 @@ const styles = theme => ({
     color: theme.palette.text.primary,
 
   },
-  lih3: {
-    margin: '7px',
-    wordWrap: 'break-word'
+  libody: {
+    margin: '3px',
+    wordWrap: 'break-word',
+    float: 'left',
+    display: 'table-cell',
+    width: '100%',
+    textAlign: 'left',
+    fontWeight: 'bold'
   },
-  formControlLabel: {
-    color: theme.palette.text.primary,
+  subtitle2: {
+    display: 'table-cell',
+
+    float: 'right',
   },
-  radio: {
-    color: theme.palette.text.primary,
-  },
+
   tabs: {
     borderBottom: '1px solid #e8e8e8',
   },
@@ -164,7 +169,34 @@ const styles = theme => ({
       opacity: 1,
     }
   },
-  selected: {}
+  selected: {},
+  pagiroot: {
+    textAlign: 'center',
+    marginTop: "10px",
+    color: theme.palette.text.primary
+  },
+  pageNaviCurrent: {
+    cursor: 'default',
+    color: '#2dd57a;',
+    '&:hover': {
+      backgroundColor: '#2dd57a;',
+      opacity: 1,
+    }
+  },
+  pageNaviText: {
+  },
+  pageNaviStandard: {
+    color: theme.palette.text.primary,
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)'
+    }
+  },
+  pageNaviArrow: {
+    color: theme.palette.text.primary,
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)'
+    }
+  }
 });
 const pagitheme = createMuiTheme();
 
@@ -211,8 +243,8 @@ class UserDetail extends React.Component {
       this.props.actions.getUserPostsList("answered_suki", this.props.match.params.user_name, UserPostsListReducer.offset, "スキ")
     } else if (UserPostsListReducer.selected === "キライ") {
       this.props.actions.getUserPostsList("answered_kirai", this.props.match.params.user_name, UserPostsListReducer.offset, "キライ")
-    } else if (UserPostsListReducer.selected === "投稿済") {
-      this.props.actions.getUserPostsList("user", this.props.match.params.user_name, UserPostsListReducer.offset, "投稿済")
+    } else if (UserPostsListReducer.selected === "投稿済テーマ") {
+      this.props.actions.getUserPostsList("user", this.props.match.params.user_name, UserPostsListReducer.offset, "投稿済テーマ")
     }
   }
 
@@ -221,8 +253,8 @@ class UserDetail extends React.Component {
       this.props.actions.getUserPostsList("answered_suki", this.props.match.params.user_name, 0, "スキ")
     } else if (newvalue === "キライ") {
       this.props.actions.getUserPostsList("answered_kirai", this.props.match.params.user_name, 0, "キライ")
-    } else if (newvalue === "投稿済") {
-      this.props.actions.getUserPostsList("user", this.props.match.params.user_name, 0, "投稿済")
+    } else if (newvalue === "投稿済テーマ") {
+      this.props.actions.getUserPostsList("user", this.props.match.params.user_name, 0, "投稿済テーマ")
     }
   }
 
@@ -232,8 +264,8 @@ class UserDetail extends React.Component {
       this.props.actions.getUserPostsList("answered_suki", this.props.match.params.user_name, offset, "スキ")
     } else if (UserPostsListReducer.selected === "キライ") {
       this.props.actions.getUserPostsList("answered_kirai", this.props.match.params.user_name, offset, "キライ")
-    } else if (UserPostsListReducer.selected === "投稿済") {
-      this.props.actions.getUserPostsList("user", this.props.match.params.user_name, offset, "投稿済")
+    } else if (UserPostsListReducer.selected === "投稿済テーマ") {
+      this.props.actions.getUserPostsList("user", this.props.match.params.user_name, offset, "投稿済テーマ")
     }
   }
 
@@ -251,12 +283,12 @@ class UserDetail extends React.Component {
 
 
       <Scrollbars>
-        <div className={classes.root} >
+        <div className={classes.container} >
           <Paper>
             <img className={classes.iconimg} src={this.state.image} />
             <Typography variant="headline" component="h3" className={classes.headh3}>
-              {this.state.name}<br />のスキライズム
-          </Typography>
+              {this.state.name}の<br />{UserPostsListReducer.selected}
+            </Typography>
           </Paper>
 
           <div>
@@ -283,33 +315,42 @@ class UserDetail extends React.Component {
                   root: classes.tab2,
                   selected: classes.selected,
                 }} selected
-                icon={<FolderIcon />} value="投稿済" />
+                icon={<FolderIcon />} value="投稿済テーマ" />
             </Tabs>
           </div>
+
 
           <ul className={classes.ul}>
             {UserPostsListReducer.items.map((post) => (
               <Link to={"/posts/" + post.id} className={classes.link}>
                 <li className={classes.li} key={post.id}>
                   <div className={classes.licontent}>
-                    <h3 className={classes.lih3}>{post.content}</h3>
+                    <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
+                      {post.content}
+                    </Typography>
                   </div>
                 </li>
               </Link>
             ))}
           </ul>
-          <MuiThemeProvider theme={pagitheme}>
-            <CssBaseline />
-            <Pagination
-              limit={10}
-              offset={UserPostsListReducer.offset}
-              total={UserPostsListReducer.page_length * 10}
-              onClick={(e, offset) => this.handlePaginationClick(offset)}
-            />
-          </MuiThemeProvider>
+
+          <Pagination
+            limit={20}
+            offset={UserPostsListReducer.offset}
+            total={UserPostsListReducer.page_length * 20}
+            onClick={(e, offset) => this.handlePaginationClick(offset)}
+            className={classes.pagiroot}
+            classes={{
+              root: classes.pageNav,
+              rootStandard: classes.pageNaviStandard,
+              rootCurrent: classes.pageNaviCurrent,
+              rootEnd: classes.pageNaviArrow,
+              text: classes.pageNaviText
+            }}
+          />
+
         </div>
       </Scrollbars >
-
     );
 
 

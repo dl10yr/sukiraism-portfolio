@@ -10,9 +10,14 @@ import { bindActionCreators } from 'redux';
 
 import * as actions from '../actions';
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import Typography from '@material-ui/core/Typography';
+
 
 const pagitheme = createMuiTheme();
 const styles = theme => ({
+  container: {
+    margin: '10px'
+  },
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -72,8 +77,10 @@ class Deleteaccount extends React.Component {
 
 
     return (
-      <div>
-        <h3>アカウントを削除しますか？</h3>
+      <div className={classes.container}>
+        <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold', marginBottom: '30px' }}>
+          アカウントを削除しますか？
+        </Typography>
         <Button variant="contained" size="large" color="secondary" className={classes.button} onClick={this.Deleteaccount}>
           する
         </Button>
