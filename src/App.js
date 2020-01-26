@@ -5,6 +5,8 @@ import Term from './containers/Term';
 import Info from './containers/Info';
 import Auth from './containers/Auth';
 import Login from './containers/Login';
+import Top from './containers/Top';
+
 import Create from './containers/Create';
 import PostsList from './containers/PostsList';
 import PostsDetail from './containers/PostDetail';
@@ -41,6 +43,7 @@ class App extends Component {
         <Notification />
         <ResponsiveDrawer className="ResponsiveDrawer">
           <Switch>
+            <Route exact path="/" component={Top} />
             <Route path="/login" component={Login} />
             <Route path="/info" component={Info} />
             <Route path="/term" component={Term} />
