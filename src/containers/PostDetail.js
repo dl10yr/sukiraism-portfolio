@@ -4,17 +4,14 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Scrollbars } from 'react-custom-scrollbars';
-
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import * as actions from '../actions';
 import PieChart from '../components/SimplePieChart';
 import _ from 'lodash';
-
 import axios from 'axios';
 
 // スタイル
@@ -41,6 +38,14 @@ const styles = theme => ({
   },
   content: {
     wordWrap: 'break-word'
+  },
+  twitterbutton: {
+    margin: '20px'
+  },
+  deletebutton: {
+    float: 'right',
+    margin: '20px',
+    marginTop: '30px'
   }
 });
 
@@ -87,11 +92,11 @@ class PostsDetail extends React.Component {
           content: postdata.post.content,
           created_at: postdata.post.created_at,
           all_count: postdata.post.all_count,
-          username: postdata.user.name
+          username: postdata.user.name,
         });
       })
       .catch(() => {
-        this.props.history.push('/')
+        this.props.history.push('/home')
       });
 
     axios.get(process.env.REACT_APP_API_URL + `/api/v1/likes/post/${this.props.match.params.id}/user/${uid}`, {
@@ -128,13 +133,13 @@ class PostsDetail extends React.Component {
           </Typography>
           <PieChart suki_percent={this.state.suki_percent} kirai_percent={this.state.kirai_percent} />
           <Typography component="p" style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-            スキ: {this.state.suki_percent}% ({this.state.suki_count}人)
+            スキ: {this.state.suki_percent}% ({this.state.suki_count}票)
             </Typography>
           <Typography component="p" style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-            キライ: {this.state.kirai_percent}% ({this.state.kirai_count}人)
+            キライ: {this.state.kirai_percent}% ({this.state.kirai_count}票)
             </Typography>
           <Typography component="p" style={{ fontWeight: 'bold' }}>
-            投票数: {this.state.all_count}人
+            投票数: {this.state.all_count}票
             </Typography>
         </Paper>
       )
@@ -151,7 +156,7 @@ class PostsDetail extends React.Component {
             まだ誰も投票してません。
           </Typography>
           <Typography component="p" style={{ fontWeight: 'bold' }}>
-            投票数: {this.state.all_count}人
+            投票数: {this.state.all_count}票
             </Typography>
         </Paper>
       )
@@ -209,7 +214,7 @@ class PostsDetail extends React.Component {
     const { classes } = this.props;
     if (CurrentUserReducer.items.name === this.state.username) {
       return (
-        <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.DeletePost}>
+        <Button variant="contained" size="large" color="primary" className={classes.deletebutton} onClick={this.DeletePost}>
           このテーマを削除する
         </Button>
       )
@@ -316,29 +321,25 @@ class PostsDetail extends React.Component {
 
           {this.renderGraphWithCondition(this.state.all_count)}
           {this.renderButtonWithCondition(this.state.user_answer_suki)}
-          {this.renderDeleteButton()}
 
-          <Button variant="contained" size="large" color="primary" className={classes.button}>
-            Twitterでシェアする
-          </Button>
-          <Button variant="contained" size="large" color="primary" className={classes.button}>
-            Lineでシェアする
-          </Button>
+
+          <TwitterShareButton title={this.state.content} url="http://www.sukiraism.com" via="sukiraism_O" target="_blank" className={classes.twitterbutton}>
+            <TwitterIcon size="50" round />
+          </TwitterShareButton>
+          {this.renderDeleteButton()}
         </div>
-      </Scrollbars>
+      </Scrollbars >
 
     );
 
   }
 }
 
-// Material-ui関連
 PostsDetail.propTypes = {
   classes: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
 };
 
-//Redux関連
 const mapState = (state, ownprops) => ({
   CurrentUserReducer: state.CurrentUserReducer,
 });
@@ -348,8 +349,6 @@ function mapDispatch(dispatch) {
   }
 }
 
-
-// Material-uiのテーマ設定
 export default connect(mapState, mapDispatch)(
   withStyles(styles, { withTheme: true })(PostsDetail)
 );

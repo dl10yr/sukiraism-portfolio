@@ -48,13 +48,18 @@ class Create extends React.Component {
         'uid': uid
       }
     })
-      .then(() => {
+      .then((response) => {
 
         this.props.actions.setNotification('success', '送信に成功しました');
         this.props.formreset();
       })
-      .catch(() => {
-        this.props.actions.setNotification('error', '送信に失敗しました');
+      .catch((error) => {
+        var str = error.response.data.exception
+        if (str.indexOf("RecordNotUnique") != -1) {
+          this.props.actions.setNotification('error', '投稿内容が既に存在しています。');
+        } else {
+          this.props.actions.setNotification('error', '送信に失敗しました');
+        }
       })
 
   }

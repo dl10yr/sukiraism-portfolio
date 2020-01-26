@@ -9,7 +9,7 @@ const styles = theme => ({
 
 class Login extends React.Component {
   loginTwitter() {
-    window.location.href = process.env.REACT_APP_API127_URL + '/api/v1/auth/twitter?auth_origin_url=' + process.env.REACT_APP_BASE_URL;
+    window.location.href = process.env.REACT_APP_API127_URL + '/api/v1/auth/twitter?auth_origin_url=' + process.env.REACT_APP_BASE_URL + '/home';
   }
 
   render() {

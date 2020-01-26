@@ -11,8 +11,13 @@ import "normalize.css";
 
 import queryString from 'query-string';
 import axios from 'axios';
+import { withStyles } from '@material-ui/core/styles';
+
 
 const styles = theme => ({
+  loading: {
+    color: theme.palette.text.primary
+  }
 });
 
 class Auth extends React.Component {
@@ -29,7 +34,7 @@ class Auth extends React.Component {
       localStorage.setItem('auth_token', tokens.auth_token)
       localStorage.setItem('client_id', tokens.client_id)
       localStorage.setItem('uid', tokens.uid)
-      window.location.href = process.env.REACT_APP_BASE_URL
+      window.location.href = process.env.REACT_APP_BASE_URL + "/home"
     } else {
       this.setState({
         isLoading: true,
@@ -70,7 +75,7 @@ class Auth extends React.Component {
 
     if (isLoading) {
       return (
-        <div>loading</div>
+        <div className={classes.loading}>loading</div>
       )
     } else {
       if (isLoggedin) {
@@ -99,8 +104,7 @@ function mapDispatch(dispatch) {
   };
 }
 
-// export default connect(mapState, mapDispatch)(
-//   withStyles(styles, { withTheme: true })(Auth)
-// );
+export default connect(mapState, mapDispatch)(
+  withStyles(styles, { withTheme: true })(Auth)
+);
 
-export default connect(mapState, mapDispatch)(Auth);

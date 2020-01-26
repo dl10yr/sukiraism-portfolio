@@ -198,7 +198,7 @@ const styles = theme => ({
     }
   }
 });
-const pagitheme = createMuiTheme();
+
 
 
 class UserDetail extends React.Component {
@@ -225,11 +225,12 @@ class UserDetail extends React.Component {
         this.setState({
           name: data.user.name,
           nickname: data.user.nickname,
-          image: data.user.image
+          image: data.user.image,
+          release: data.user.release
         });
       })
       .catch(() => {
-        this.props.history.push('/')
+        this.props.history.push('/home')
       });
     this.handleChange = this.handleChange.bind(this);
     this.handlePaginationClick = this.handlePaginationClick.bind(this);
@@ -239,6 +240,7 @@ class UserDetail extends React.Component {
 
   componentDidMount() {
     const { UserPostsListReducer } = this.props;
+
     if (UserPostsListReducer.selected === "スキ") {
       this.props.actions.getUserPostsList("answered_suki", this.props.match.params.user_name, UserPostsListReducer.offset, "スキ")
     } else if (UserPostsListReducer.selected === "キライ") {
@@ -246,6 +248,7 @@ class UserDetail extends React.Component {
     } else if (UserPostsListReducer.selected === "投稿済テーマ") {
       this.props.actions.getUserPostsList("user", this.props.match.params.user_name, UserPostsListReducer.offset, "投稿済テーマ")
     }
+
   }
 
   handleChange(e, newvalue) {
@@ -279,79 +282,94 @@ class UserDetail extends React.Component {
     const { CurrentUserReducer } = this.props;
     const { UserPostsListReducer } = this.props;
 
-    return (
+    if (this.state.release === "released" || CurrentUserReducer.items.nickname === this.props.match.params.user_name) {
+      return (
+        <Scrollbars>
+          <div className={classes.container} >
+            <Paper>
+              <img className={classes.iconimg} src={this.state.image} />
+              <Typography variant="headline" component="h3" className={classes.headh3}>
+                {this.state.name}の<br />{UserPostsListReducer.selected}
+              </Typography>
+            </Paper>
+
+            <div>
+              <Tabs
+                classes={{
+                  root: classes.tabs,
+                  indicator: classes.indicator,
+                }}
+                value={UserPostsListReducer.selected} variant="fullWidth" onChange={this.handleChange} aria-label="simple tabs example">
+                <Tab
+                  classes={{
+                    root: classes.tab,
+                    selected: classes.selected,
+                  }} selected
+                  icon={<ThumbUpIcon />} value="スキ" />
+                <Tab
+                  classes={{
+                    root: classes.tab1,
+                    selected: classes.selected,
+                  }} selected
+                  icon={<ThumbDownIcon />} value="キライ" />
+                <Tab
+                  classes={{
+                    root: classes.tab2,
+                    selected: classes.selected,
+                  }} selected
+                  icon={<FolderIcon />} value="投稿済テーマ" />
+              </Tabs>
+            </div>
 
 
-      <Scrollbars>
-        <div className={classes.container} >
-          <Paper>
-            <img className={classes.iconimg} src={this.state.image} />
-            <Typography variant="headline" component="h3" className={classes.headh3}>
-              {this.state.name}の<br />{UserPostsListReducer.selected}
-            </Typography>
-          </Paper>
+            <ul className={classes.ul}>
+              {UserPostsListReducer.items.map((post) => (
+                <Link to={"/posts/" + post.id} className={classes.link}>
+                  <li className={classes.li} key={post.id}>
+                    <div className={classes.licontent}>
+                      <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
+                        {post.content}
+                      </Typography>
+                    </div>
+                  </li>
+                </Link>
+              ))}
+            </ul>
 
-          <div>
-            <Tabs
+            <Pagination
+              limit={20}
+              offset={UserPostsListReducer.offset}
+              total={UserPostsListReducer.page_length * 20}
+              onClick={(e, offset) => this.handlePaginationClick(offset)}
+              className={classes.pagiroot}
               classes={{
-                root: classes.tabs,
-                indicator: classes.indicator,
+                root: classes.pageNav,
+                rootStandard: classes.pageNaviStandard,
+                rootCurrent: classes.pageNaviCurrent,
+                rootEnd: classes.pageNaviArrow,
+                text: classes.pageNaviText
               }}
-              value={UserPostsListReducer.selected} variant="fullWidth" onChange={this.handleChange} aria-label="simple tabs example">
-              <Tab
-                classes={{
-                  root: classes.tab,
-                  selected: classes.selected,
-                }} selected
-                icon={<ThumbUpIcon />} value="スキ" />
-              <Tab
-                classes={{
-                  root: classes.tab1,
-                  selected: classes.selected,
-                }} selected
-                icon={<ThumbDownIcon />} value="キライ" />
-              <Tab
-                classes={{
-                  root: classes.tab2,
-                  selected: classes.selected,
-                }} selected
-                icon={<FolderIcon />} value="投稿済テーマ" />
-            </Tabs>
+            />
+
           </div>
+        </Scrollbars >
+      );
+    } else {
+      return (
+        <Scrollbars>
+          <div className={classes.container} >
+            <Paper>
+              <img className={classes.iconimg} src={this.state.image} />
+              <Typography variant="headline" component="h3" className={classes.headh3}>
+                {this.state.name}の<br />スキキライは公開されていません。
+              </Typography>
+            </Paper>
+          </div>
+        </Scrollbars >
+      );
+    }
 
 
-          <ul className={classes.ul}>
-            {UserPostsListReducer.items.map((post) => (
-              <Link to={"/posts/" + post.id} className={classes.link}>
-                <li className={classes.li} key={post.id}>
-                  <div className={classes.licontent}>
-                    <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
-                      {post.content}
-                    </Typography>
-                  </div>
-                </li>
-              </Link>
-            ))}
-          </ul>
-
-          <Pagination
-            limit={20}
-            offset={UserPostsListReducer.offset}
-            total={UserPostsListReducer.page_length * 20}
-            onClick={(e, offset) => this.handlePaginationClick(offset)}
-            className={classes.pagiroot}
-            classes={{
-              root: classes.pageNav,
-              rootStandard: classes.pageNaviStandard,
-              rootCurrent: classes.pageNaviCurrent,
-              rootEnd: classes.pageNaviArrow,
-              text: classes.pageNaviText
-            }}
-          />
-
-        </div>
-      </Scrollbars >
-    );
 
 
 

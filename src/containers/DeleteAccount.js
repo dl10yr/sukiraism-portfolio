@@ -65,7 +65,7 @@ class Deleteaccount extends React.Component {
         }
       })
     localStorage.clear();
-    window.location.href = process.env.REACT_APP_BASE_URL;
+    window.location.href = process.env.REACT_APP_BASE_URL + "/home";
   }
 
   notDeleteaccount() {

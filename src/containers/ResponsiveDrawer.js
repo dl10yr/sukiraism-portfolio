@@ -140,7 +140,7 @@ class ResponsiveDrawer extends React.Component {
       )
     } else {
       return (
-        <a className={classes.a} href={process.env.REACT_APP_API127_URL + "/api/v1/auth/twitter?auth_origin_url=" + process.env.REACT_APP_BASE_URL} >
+        <a className={classes.a} href={process.env.REACT_APP_API127_URL + "/api/v1/auth/twitter?auth_origin_url=" + process.env.REACT_APP_BASE_URL + "/home"} >
           <Icon>add_circle</Icon>
         </a>
 
@@ -194,7 +194,7 @@ class ResponsiveDrawer extends React.Component {
       <div>
         <List>
           <ResponsiveDrawerListItem
-            to="/"
+            to="/home"
             onClick={this.closeDrawerNav}
             icon={<HomeIcon />}
             text="ホーム"
@@ -260,7 +260,7 @@ class ResponsiveDrawer extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Link to="/">
+            <Link to="/home">
               {/* <img src={titlepng} width="150px" alt="title_logo" className={classes.headerLogo} /> */}
               <img src={titlepng} width="150px" alt="title_logo" className={classes.headerLogo} />
             </Link>
