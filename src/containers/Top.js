@@ -132,7 +132,7 @@ class Top extends React.Component {
             いきなり個人的な話ですが、日本社会に対するネガティブなイメージが年々大きくなっています。
           </Typography>
           <Typography variant="headline" component="p" className={classes.p}>
-            「〜するべきだ」「〜しなくてはいけない」と言った同調圧力が大きく、また、その理由を論理的に明確に説明できる人が少ないからです。
+            「〜するべきだ」「〜しなくてはいけない」のような同調圧力が大きく、また、その理由を論理的に明確に説明できる人が少ないからです。
           </Typography>
           <Typography variant="headline" component="p" className={classes.p}>
             「みんながやっているから」「それが世間だ」...そんな曖昧な理由で、他人の意思・時間を奪っていく人が多すぎると感じています。

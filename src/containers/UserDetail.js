@@ -289,7 +289,7 @@ class UserDetail extends React.Component {
             <Paper>
               <img className={classes.iconimg} src={this.state.image} />
               <Typography variant="headline" component="h3" className={classes.headh3}>
-                {this.state.name}の<br />{UserPostsListReducer.selected}
+                {this.state.name}さんの<br />{UserPostsListReducer.selected}
               </Typography>
             </Paper>
 
@@ -361,7 +361,7 @@ class UserDetail extends React.Component {
             <Paper>
               <img className={classes.iconimg} src={this.state.image} />
               <Typography variant="headline" component="h3" className={classes.headh3}>
-                {this.state.name}の<br />スキキライは公開されていません。
+                {this.state.name}さんの<br />スキキライは公開されていません。
               </Typography>
             </Paper>
           </div>
