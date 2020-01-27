@@ -147,6 +147,63 @@ class ResponsiveDrawer extends React.Component {
       );
     }
   }
+  renderTitlelink() {
+    const { CurrentUserReducer } = this.props;
+    const { classes } = this.props;
+    const isLoggedin = CurrentUserReducer.isLoggedin;
+    if (isLoggedin) {
+      return (
+        <Link to="/home">
+          <img src={titlepng} width="150px" alt="title_logo" className={classes.headerLogo} />
+        </Link>
+      )
+    } else {
+      return (
+        <Link to="/">
+          <img src={titlepng} width="150px" alt="title_logo" className={classes.headerLogo} />
+        </Link>
+
+      );
+    }
+  }
+  renderBarswithCondition() {
+    const { CurrentUserReducer } = this.props;
+    const isLoggedin = CurrentUserReducer.isLoggedin;
+    if (isLoggedin) {
+      return (
+        <div>
+          <List>
+            <ResponsiveDrawerListItem
+              to="/postslist"
+              onClick={this.closeDrawerNav}
+              icon={<ViewListIcon />}
+              text="テーマ一覧"
+            />
+          </List>
+          <List>
+            <ResponsiveDrawerListItem
+              to="/create"
+              onClick={this.closeDrawerNav}
+              icon={<SendIcon />}
+              text="テーマ投稿"
+            />
+          </List>
+          <List>
+            <ResponsiveDrawerListItem
+              to="/search"
+              onClick={this.closeDrawerNav}
+              icon={<SearchIcon />}
+              text="テーマ検索"
+            />
+          </List>
+
+          <Divider />
+        </div>
+      )
+    } else {
+
+    }
+  }
   renderDeletewithCondition() {
     const { CurrentUserReducer } = this.props;
     const isLoggedin = CurrentUserReducer.isLoggedin;
@@ -158,6 +215,24 @@ class ResponsiveDrawer extends React.Component {
             onClick={this.closeDrawerNav}
             icon={<SettingsIcon />}
             text="アカウントの削除"
+          />
+        </List>
+      )
+    } else {
+
+    }
+  }
+  renderPrivacywithCondition() {
+    const { CurrentUserReducer } = this.props;
+    const isLoggedin = CurrentUserReducer.isLoggedin;
+    if (isLoggedin) {
+      return (
+        <List>
+          <ResponsiveDrawerListItem
+            to="/privacy"
+            onClick={this.closeDrawerNav}
+            icon={<SettingsIcon />}
+            text="プライバシー"
           />
         </List>
       )
@@ -192,40 +267,8 @@ class ResponsiveDrawer extends React.Component {
 
     const drawer = (
       <div>
-        <List>
-          <ResponsiveDrawerListItem
-            to="/home"
-            onClick={this.closeDrawerNav}
-            icon={<HomeIcon />}
-            text="ホーム"
-          />
-        </List>
-        <List>
-          <ResponsiveDrawerListItem
-            to="/postslist"
-            onClick={this.closeDrawerNav}
-            icon={<ViewListIcon />}
-            text="テーマ一覧"
-          />
-        </List>
-        <List>
-          <ResponsiveDrawerListItem
-            to="/create"
-            onClick={this.closeDrawerNav}
-            icon={<SendIcon />}
-            text="テーマ投稿"
-          />
-        </List>
-        <List>
-          <ResponsiveDrawerListItem
-            to="/search"
-            onClick={this.closeDrawerNav}
-            icon={<SearchIcon />}
-            text="テーマ検索"
-          />
-        </List>
+        {this.renderBarswithCondition()}
 
-        <Divider />
         <List>
           <ResponsiveDrawerListItem
             to="/info"
@@ -239,12 +282,14 @@ class ResponsiveDrawer extends React.Component {
             to="/term"
             onClick={this.closeDrawerNav}
             icon={<AssignmentIcon />}
-            text="利用規約"
+            text="利用規約・プライバシーポリシー"
           />
         </List>
         <Divider />
         {this.renderDeletewithCondition()}
         {this.renderLogoutwithCondition()}
+        {this.renderPrivacywithCondition()}
+
       </div>
     );
 
@@ -260,10 +305,8 @@ class ResponsiveDrawer extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Link to="/home">
-              {/* <img src={titlepng} width="150px" alt="title_logo" className={classes.headerLogo} /> */}
-              <img src={titlepng} width="150px" alt="title_logo" className={classes.headerLogo} />
-            </Link>
+
+            {this.renderTitlelink()}
             {this.renderUserlink()}
           </Toolbar>
         </AppBar>

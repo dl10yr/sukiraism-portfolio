@@ -14,6 +14,8 @@ import UserDetail from './containers/UserDetail';
 import Search from './containers/Search';
 import Logout from './containers/Logout';
 import DeleteAccount from './containers/DeleteAccount';
+import Privacy from './containers/Privacy';
+
 
 import Notification from './containers/Notification';
 
@@ -57,12 +59,14 @@ class App extends Component {
                 <Route exact path="/search" component={Search} />
                 <Route exact path="/logout" component={Logout} />
                 <Route exact path="/deleteaccount" component={DeleteAccount} />
+                <Route exact path="/privacy" component={Privacy} />
 
               </Switch>
             </Auth>
           </Switch>
         </ResponsiveDrawer>
         <RouteRelatedBottomNavigation />
+
       </div >
     );
   }

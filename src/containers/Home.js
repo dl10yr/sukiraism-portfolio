@@ -200,13 +200,12 @@ class Home extends React.Component {
   }
 }
 
-// Material-ui関連
+
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
 };
 
-// Redux関連
 const mapState = (state, ownProps) => ({
   CurrentUserReducer: state.CurrentUserReducer,
 });
@@ -216,7 +215,7 @@ function mapDispatch(dispatch) {
   };
 }
 
-// Material-uiのテーマ設定＋Redux設定
+
 export default connect(mapState, mapDispatch)(
   withStyles(styles, { withTheme: true })(Home)
 );

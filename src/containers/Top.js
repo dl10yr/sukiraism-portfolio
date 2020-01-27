@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import PeopleIcon from '@material-ui/icons/People';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import PersonIcon from '@material-ui/icons/Person';
+import MainIcon from '../images/MainIcon.png';
+
 import { Scrollbars } from 'react-custom-scrollbars';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -49,6 +52,7 @@ const styles = theme => ({
   },
   container: {
     margin: '20px',
+    height: '100%'
   },
   topsen: {
     margin: 30,
@@ -59,24 +63,54 @@ const styles = theme => ({
     width: '100px',
     height: '100px',
     color: '#2dd57a',
+  },
+  loginbtn: {
+    padding: '0px',
+    margin: '10px',
+    padding: '10px',
+    width: '250px',
+    height: '50px',
+    borderRadius: '5px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    borderWidth: '0',
+    fontWeight: 'bold',
+    fontSize: 'large',
+    color: 'rgb(255, 255, 255)',
+    background: '#00acee',
   }
 });
 
 
-class Term extends React.Component {
+class Top extends React.Component {
   constructor(props) {
     super(props);
   }
 
 
   componentDidMount() {
-    // this.props.fetchFeeds({
-    //   cursor: null, // 初期fetch
-    // })
+    const auth_token = localStorage.auth_token
+    const client_id = localStorage.client_id
+    const uid = localStorage.uid
+    axios.get(process.env.REACT_APP_API_URL + '/api/v1/user/currentuser', {
+      headers: {
+        'access-token': auth_token,
+        'client': client_id,
+        'uid': uid
+      }
+    })
+      .then((response) => {
+        this.props.actions.setCurrentUserSuccess(response.data.data)
+        window.location.href = process.env.REACT_APP_BASE_URL + "/home"
+      })
+      .catch(() => {
+      });
+  }
+  loginTwitter() {
+    window.location.href = process.env.REACT_APP_API127_URL + '/api/v1/auth/twitter?auth_origin_url=' + process.env.REACT_APP_BASE_URL + '/home';
   }
 
   render() {
-    const { PostsListReducer } = this.props;
 
     // Material-ui関連
     const { classes } = this.props;
@@ -85,9 +119,14 @@ class Term extends React.Component {
     return (
       <Scrollbars>
         <div className={classes.container}>
+          <button size="large" variant="contained" color="blue" onClick={this.loginTwitter} className={classes.loginbtn}>
+            Twitterでログインする
+          </button>
           <Typography variant="headline" component="h2" className={classes.h2}>
             好き嫌いの情報<br />を可視化する
           </Typography>
+
+          <img src={MainIcon} width="100px" alt="main_icon" className={classes.root} />
 
           <Typography variant="headline" component="p" className={classes.p}>
             いきなり個人的な話ですが、日本社会に対するネガティブなイメージが年々大きくなっています。
@@ -145,15 +184,16 @@ class Term extends React.Component {
           </Typography>
 
           <Typography variant="headline" component="p" className={classes.p}>
-            自分が「好き」と思っていても、他人は「大嫌い」かもしれません。スキライズムでは、みんなの好き嫌いを知る機会を提供します。
+            自分が「好き」と思っていても、他人は「大嫌い」かもしれません。スキライズムは、みんなの好き嫌いを知る機会を提供します。
           </Typography>
 
 
           <Typography variant="headline" component="h2" className={classes.h2}>
-            さぁ、始めよう。
+            さあ、始めよう。
           </Typography>
-
-          <Button>XXX</Button>
+          <button size="large" variant="contained" color="blue" onClick={this.loginTwitter} className={classes.loginbtn}>
+            Twitterでログインする
+          </button>
 
         </div>
 
@@ -165,17 +205,20 @@ class Term extends React.Component {
   }
 }
 
-// Redux関連
-const mapStateToProps = (state, ownProps) => ({
-  PostsListReducer: state.PostsListReducer,
+Top.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+const mapState = (state, ownProps) => ({
+  CurrentUserReducer: state.CurrentUserReducer,
 });
-function mapDispatchToProps(dispatch) {
+function mapDispatch(dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch),
   };
 }
 
-// Material-uiのテーマ設定＋Redux設定
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles, { withTheme: true })(Term)
+
+export default connect(mapState, mapDispatch)(
+  withStyles(styles, { withTheme: true })(Top)
 );
