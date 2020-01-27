@@ -145,14 +145,14 @@ h2 {
 .simple_square_btn {
 	display: inline-block;
 	position: relative;
-  width: 35%;
-  height: 100px;
+  width: 25%;
+  height: 70px;
   padding: 0.8em;
   margin: 10px;
+  margin-bottom: 30px;
 	text-align: center;
   text-decoration: none;
   font-weight: bold;
-  font-size: x-large;
 	color: #fff;
 }
 
@@ -177,6 +177,23 @@ h2 {
 	text-decoration: none;
   background: #209e5b;
   outline: 0;
+}
+
+.skip-btn {
+  border-width: 0;
+  border-radius: 5px;
+
+  outline: 0;
+  background: #2dd57a;
+}
+
+.skip-btn:active {
+	cursor: pointer;
+	text-decoration: none;
+
+  outline: 0;
+  background: #209e5b;
+
 }
 
 

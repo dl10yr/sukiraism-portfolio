@@ -70,6 +70,8 @@ class Home extends React.Component {
 
       });
     this.reload = this.reload.bind(this);
+    this.skipCard = this.skipCard.bind(this);
+
   }
 
   reset = () => {
@@ -125,6 +127,11 @@ class Home extends React.Component {
     })
       .then(response => { })
       .catch(error => { })
+  }
+
+  skipCard() {
+    console.log(this.state.not_answered_posts)
+    this.state.not_answered_posts.shift();
   }
 
   reload() {
@@ -189,6 +196,9 @@ class Home extends React.Component {
         <div className="buttonArea">
           <button onClick={() => { cards.dislike(); }} className="simple_square_btn kirai-btn">
             キライ
+          </button>
+          <button onClick={() => { cards.removeCard(); }} className="simple_square_btn skip-btn">
+            パス
           </button>
           <button onClick={() => { cards.like(); }} className="simple_square_btn suki-btn">
             スキ
