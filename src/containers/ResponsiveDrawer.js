@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,19 +10,12 @@ import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
 import Icon from '@material-ui/core/Icon';
-
 import SettingsIcon from '@material-ui/icons/Settings';
-import ShareIcon from '@material-ui/icons/Share';
-
-import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import SendIcon from '@material-ui/icons/Send';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import SearchIcon from '@material-ui/icons/Search';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-
-// import titlepng from '../images/sukiraism_title.png'
-
 import { Link } from 'react-router-dom';
 
 import ResponsiveDrawerListItem from '../components/ResponsiveDrawerListItem';
@@ -261,9 +253,8 @@ class ResponsiveDrawer extends React.Component {
 
   render() {
 
-    const { classes, theme, title, search } = this.props;
+    const { classes, theme, } = this.props;
     const { CurrentUserReducer } = this.props;
-    const isloggedin = CurrentUserReducer.isLoggedin;
 
     const drawer = (
       <div>

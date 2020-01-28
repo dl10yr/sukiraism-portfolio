@@ -25,7 +25,7 @@ import RouteRelatedBottomNavigation from './containers/RouteRelatedBottomNavigat
 
 
 import { withStyles } from '@material-ui/core/styles';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import "normalize.css";
 import "./App.css";
 

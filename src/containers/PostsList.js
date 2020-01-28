@@ -127,8 +127,6 @@ const styles = theme => ({
 });
 
 
-
-
 class PostsList extends React.Component {
   constructor(props) {
     super(props);

@@ -14,7 +14,7 @@ import logger from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 
 
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
 
 const store = createStore(
   rootReducer,
