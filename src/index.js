@@ -15,11 +15,18 @@ import { createStore, applyMiddleware } from 'redux';
 
 
 // const history = createBrowserHistory();
+if (ProcessingInstruction.env.NODE_ENV != `production`) {
+  const store = createStore(
+    rootReducer,
+    applyMiddleware(thunk, logger)
+  );
+} else {
+  const store = createStore(
+    rootReducer,
+    applyMiddleware(thunk)
+  );
+}
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk, logger)
-);
 
 ReactDOM.render(
   <Provider store={store}>
