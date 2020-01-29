@@ -10,17 +10,16 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers/rootReducer';
 import thunk from 'redux-thunk'
-import logger from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 
 const middlewares = []
 middlewares.push(thunk)
 
 
-if (process.env.NODE_ENV !== 'production') {
-  const { logger } = require('redux-logger')
-  middlewares.push(logger)
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   const { logger } = require('redux-logger')
+//   middlewares.push(logger)
+// }
 
 // const history = createBrowserHistory();
 const store = createStore(
