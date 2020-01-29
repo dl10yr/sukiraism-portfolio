@@ -13,19 +13,21 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 
+const middlewares = []
+middlewares.push(thunk)
+
+
+if (process.env.NODE_ENV !== 'production') {
+  const { logger } = require('redux-logger')
+  middlewares.push(logger)
+}
 
 // const history = createBrowserHistory();
-if (process.env.NODE_ENV !== `production`) {
-  const store = createStore(
-    rootReducer,
-    applyMiddleware(thunk, logger)
-  );
-} else {
-  const store = createStore(
-    rootReducer,
-    applyMiddleware(thunk)
-  );
-}
+const store = createStore(
+  rootReducer,
+  applyMiddleware(...middlewares)
+)
+
 
 
 ReactDOM.render(
