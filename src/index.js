@@ -15,7 +15,7 @@ import { createStore, applyMiddleware } from 'redux';
 
 
 // const history = createBrowserHistory();
-if (process.env.NODE_ENV != `production`) {
+if (process.env.NODE_ENV !== `production`) {
   const store = createStore(
     rootReducer,
     applyMiddleware(thunk, logger)
