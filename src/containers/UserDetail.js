@@ -12,13 +12,11 @@ import Typography from '@material-ui/core/Typography';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Pagination from "material-ui-flat-pagination";
 import { Link } from 'react-router-dom';
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
 import axios from 'axios';
-import _ from 'lodash';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -35,10 +33,6 @@ const styles = theme => ({
   paragraph: {
     marginTop: 10,
     marginBottom: 10,
-  },
-  button: {
-    margin: theme.spacing(1),
-    fontweight: "fontWeightBold",
   },
   row: {
     margin: 10,
@@ -57,7 +51,9 @@ const styles = theme => ({
     marginBottom: 20,
     fontSize: 16,
     padding: 10,
-    width: 250,
+    width: '33.33%',
+    margin: theme.spacing(1),
+    fontweight: "fontWeightBold",
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
@@ -72,9 +68,6 @@ const styles = theme => ({
   buttongroup: {
     width: '100%',
     marginTop: '10px'
-  },
-  button: {
-    width: '33.33%',
   },
   iconimg: {
     width: '50px',
@@ -274,10 +267,6 @@ class UserDetail extends React.Component {
 
   render() {
 
-    // redux関連
-    const { actions } = this.props;
-
-    // Material-ui関連
     const { classes } = this.props;
     const { CurrentUserReducer } = this.props;
     const { UserPostsListReducer } = this.props;
@@ -287,7 +276,7 @@ class UserDetail extends React.Component {
         <Scrollbars>
           <div className={classes.container} >
             <Paper>
-              <img className={classes.iconimg} src={this.state.image} />
+              <img alt="user_icon" className={classes.iconimg} src={this.state.image} />
               <Typography variant="headline" component="h3" className={classes.headh3}>
                 {this.state.name}さんの<br />{UserPostsListReducer.selected}
               </Typography>
@@ -359,7 +348,7 @@ class UserDetail extends React.Component {
         <Scrollbars>
           <div className={classes.container} >
             <Paper>
-              <img className={classes.iconimg} src={this.state.image} />
+              <img alt="user_icon" className={classes.iconimg} src={this.state.image} />
               <Typography variant="headline" component="h3" className={classes.headh3}>
                 {this.state.name}さんの<br />スキキライは公開されていません。
               </Typography>

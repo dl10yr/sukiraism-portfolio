@@ -1,15 +1,11 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios'
-import { SubmissionError } from 'redux-form';
 
 
 const useStyles = makeStyles(theme => ({
   button: {
-    padding: '0px',
     margin: '10px',
     padding: '10px',
     width: '50%',
@@ -77,7 +73,7 @@ const renderTextField = ({
   )
 
 const CreateForm = props => {
-  const { handleSubmit, pristine, reset, submitting } = props
+  const { handleSubmit } = props
   const classes = useStyles();
   return (
     <form onSubmit={handleSubmit} >

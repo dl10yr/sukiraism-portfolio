@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import PeopleIcon from '@material-ui/icons/People';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
@@ -38,10 +36,11 @@ const styles = theme => ({
     margin: '20px'
 
   },
-  h2: {
+  h4: {
     color: theme.palette.text.primary,
     margin: '20px',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   p: {
     color: theme.palette.text.secondary,
@@ -65,7 +64,6 @@ const styles = theme => ({
     color: '#2dd57a',
   },
   loginbtn: {
-    padding: '0px',
     margin: '10px',
     padding: '10px',
     width: '250px',
@@ -83,9 +81,6 @@ const styles = theme => ({
 
 
 class Top extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
 
   componentDidMount() {
@@ -122,68 +117,68 @@ class Top extends React.Component {
           <button size="large" variant="contained" color="blue" onClick={this.loginTwitter} className={classes.loginbtn}>
             Twitterでログインする
           </button>
-          <Typography variant="headline" component="h2" className={classes.h2}>
+          <Typography variant="h4" className={classes.h4}>
             好き嫌いの情報<br />を可視化する
           </Typography>
 
           <img src={MainIcon} width="100px" alt="main_icon" className={classes.root} />
 
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             いきなり個人的な話ですが、日本社会に対するネガティブなイメージが年々大きくなっています。
           </Typography>
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             「〜するべきだ」「〜しなくてはいけない」のような同調圧力が大きく、また、その理由を論理的に明確に説明できる人が少ないからです。
           </Typography>
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             「みんながやっているから」「それが世間だ」...そんな曖昧な理由で、他人の意思・時間を奪っていく人が多すぎると感じています。
           </Typography>
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             その「〜するべきだ」といった「正しさ」も、その人の「好き嫌い」にしか過ぎず、「好き嫌い」を「正しい正しくない」にすり替えて押し付けているようにも感じます。
           </Typography>
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             つまり、「好き嫌い」の情報こそが、人間の行動を決定する上で一番重要な情報であり、その情報を可視化できるサービスが求められていると確信しています。
           </Typography>
-          <Typography variant="headline" component="h2" className={classes.h2}>
-            嫌なことをしない世界へ
+          <Typography variant="h4" className={classes.h4}>
+            嫌なことを<br />しない
           </Typography>
           <DirectionsRunIcon className={classes.root} />
 
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             終身雇用、年功序列の崩壊が始まった今、嫌なことをやって一つの会社に居続ける意味が薄れています。
           </Typography>
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             生きている時間は有限です。自分の好き嫌いに正直になり、好きなことに没頭しませんか？
             個人が何かに没頭することは、社会全体に対しても新しい価値をもたらし、ポジティブに作用すると確信しています。
           </Typography>
 
-          <Typography variant="headline" component="h2" className={classes.h2}>
-            自分の好き嫌いを知る
+          <Typography variant="h4" className={classes.h4}>
+            自分の<br />好き嫌いを知る
           </Typography>
           <PersonIcon className={classes.root} />
 
 
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             嫌なことをしないで生きることは、自分の好き嫌いを明確に意識していくことから始まります。
 
           </Typography>
 
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             スキライズムでは、投稿されたテーマに対して、簡単に「スキ」「キライ」を投票でき、そのすべての履歴を確認することができます。
             また、その情報を非公開にすることもできます。
           </Typography>
 
 
-          <Typography variant="headline" component="h2" className={classes.h2}>
-            みんなの好き嫌いを知る
+          <Typography variant="h4" className={classes.h4}>
+            みんなの<br />好き嫌いを知る
           </Typography>
 
           <PeopleIcon className={classes.root} />
 
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             嫌なことをしないで生きることは、他人に対して「自分の嫌い」を押し付けることではありません。「他人の嫌い」も尊重していく必要があります。
           </Typography>
 
-          <Typography variant="headline" component="p" className={classes.p}>
+          <Typography component="p" className={classes.p}>
             自分が「好き」と思っていても、他人は「大嫌い」かもしれません。スキライズムは、みんなの好き嫌いを知る機会を提供します。
           </Typography>
 

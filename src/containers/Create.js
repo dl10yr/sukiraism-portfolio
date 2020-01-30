@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { startSubmit, stopSubmit, reset } from 'redux-form';
+import { reset } from 'redux-form';
 import Typography from '@material-ui/core/Typography';
 
 import * as actions from '../actions';
@@ -55,7 +55,7 @@ class Create extends React.Component {
       })
       .catch((error) => {
         var str = error.response.data.exception
-        if (str.indexOf("RecordNotUnique") != -1) {
+        if (str.indexOf("RecordNotUnique") !== -1) {
           this.props.actions.setNotification('error', '投稿内容が既に存在しています。');
         } else {
           this.props.actions.setNotification('error', '送信に失敗しました');
@@ -65,9 +65,6 @@ class Create extends React.Component {
   }
 
   render() {
-    const { actions } = this.props;
-    const { CurrentUserReducer } = this.props;
-
     const { classes } = this.props;
     return (
       <div className={classes.container}>

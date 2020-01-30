@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
 import { withStyles } from '@material-ui/core/styles';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import Pagination from "material-ui-flat-pagination";
 
@@ -176,13 +176,13 @@ class PostsList extends React.Component {
       return (
         <ul className={classes.ul}>
           {PostsListReducer.items.map((post) => (
-            <Link to={"/posts/" + post.id} className={classes.link}>
+            <Link key={post.id} to={"/posts/" + post.id} className={classes.link}>
               <li className={classes.li} key={post.id}>
                 <div className={classes.licontent}>
-                  <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
+                  <Typography variant="body1" color="textPrimary" className={classes.libody} >
                     {post.content}
                   </Typography>
-                  <Typography variant="subtitle2" component="subtitle2" color="textPrimary" className={classes.subtitle2} >
+                  <Typography variant="subtitle2" color="textPrimary" className={classes.subtitle2} >
                     <Moment fromNow>{post.created_at}</Moment>
                   </Typography>
                 </div>
@@ -198,10 +198,10 @@ class PostsList extends React.Component {
             <Link to={"/posts/" + post.id} className={classes.link}>
               <li className={classes.li} key={post.id}>
                 <div className={classes.licontent}>
-                  <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
+                  <Typography variant="body1" color="textPrimary" className={classes.libody} >
                     {post.content}
                   </Typography>
-                  <Typography variant="subtitle2" component="subtitle2" color="textPrimary" className={classes.subtitle2} >
+                  <Typography variant="subtitle2" color="textPrimary" className={classes.subtitle2} >
                     {post.suki_percent}%
                   </Typography>
                 </div>
@@ -217,10 +217,10 @@ class PostsList extends React.Component {
             <Link to={"/posts/" + post.id} className={classes.link}>
               <li className={classes.li} key={post.id}>
                 <div className={classes.licontent}>
-                  <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
+                  <Typography variant="body1" color="textPrimary" className={classes.libody} >
                     {post.content}
                   </Typography>
-                  <Typography variant="subtitle2" component="subtitle2" color="textPrimary" className={classes.subtitle2} >
+                  <Typography variant="subtitle2" color="textPrimary" className={classes.subtitle2} >
                     {post.all_count}票
                   </Typography>
                 </div>
@@ -233,11 +233,8 @@ class PostsList extends React.Component {
   }
 
   render() {
-    const { CurrentUserReducer } = this.props;
     const { PostsListReducer } = this.props;
     const { classes } = this.props;
-    const { pagiclasses } = this.props;
-
 
     return (
       <Scrollbars>
@@ -309,6 +306,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles, { withTheme: true })(PostsList)
-);
+));

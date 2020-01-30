@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as actions from '../actions';
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 

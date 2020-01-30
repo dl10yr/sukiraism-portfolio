@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
@@ -44,21 +43,15 @@ const styles = theme => ({
 
 
 class Term extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
 
   componentDidMount() {
-    // this.props.fetchFeeds({
-    //   cursor: null, // 初期fetch
-    // })
   }
 
   render() {
-    const { PostsListReducer } = this.props;
-
-    // Material-ui関連
     const { classes } = this.props;
 
 
@@ -228,6 +221,7 @@ class Term extends React.Component {
             </Typography>
           </Paper>
           <iframe
+            title="google-toiawase"
             src="https://docs.google.com/forms/d/e/1FAIpQLSdJu4ntlnrRXeUQynp0QWw1gMWEomfap_oN6GGrtqY8uI9xAg/viewform?embedded=true"
             width="400"
             height="500"

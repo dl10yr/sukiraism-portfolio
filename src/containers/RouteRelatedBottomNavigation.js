@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-
-import HomeIcon from '@material-ui/icons/Home';
-import InfoIcon from '@material-ui/icons/Info';
 import SendIcon from '@material-ui/icons/Send';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -75,7 +72,7 @@ class RouteRelatedBottomNavigation extends React.Component {
           // showLabels
           classes={{
             root: classes.root,
-            selected: classes.selected,
+            // selected: classes.selected,
           }}
           children={this.buttons}
         />

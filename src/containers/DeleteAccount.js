@@ -9,11 +9,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as actions from '../actions';
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Typography from '@material-ui/core/Typography';
 
 
-const pagitheme = createMuiTheme();
 const styles = theme => ({
   container: {
     margin: '10px'
@@ -52,7 +50,6 @@ class Deleteaccount extends React.Component {
   }
 
   Deleteaccount() {
-    const { CurrentUserReducer } = this.props;
     const auth_token = localStorage.auth_token
     const client_id = localStorage.client_id
     const uid = localStorage.uid

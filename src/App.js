@@ -25,7 +25,9 @@ import RouteRelatedBottomNavigation from './containers/RouteRelatedBottomNavigat
 
 
 import { withStyles } from '@material-ui/core/styles';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import "normalize.css";
 import "./App.css";
 
@@ -41,33 +43,38 @@ const styles = theme => ({
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Notification />
-        <ResponsiveDrawer className="ResponsiveDrawer">
-          <Switch>
-            <Route exact path="/" component={Top} />
-            <Route path="/login" component={Login} />
-            <Route path="/info" component={Info} />
-            <Route path="/term" component={Term} />
-            <Auth>
-              <Switch>
-                <Route exact path="/home" component={Home} />
-                <Route path='/create' component={Create} />
-                <Route path='/postslist' component={PostsList} />
-                <Route exact path="/posts/:id" component={PostsDetail} />
-                <Route exact path="/users/:user_name" component={UserDetail} />
-                <Route exact path="/search" component={Search} />
-                <Route exact path="/logout" component={Logout} />
-                <Route exact path="/deleteaccount" component={DeleteAccount} />
-                <Route exact path="/privacy" component={Privacy} />
+      <Router>
 
-              </Switch>
-            </Auth>
-          </Switch>
-        </ResponsiveDrawer>
-        <RouteRelatedBottomNavigation />
+        <div className="App">
+          <Notification />
+          <ResponsiveDrawer className="ResponsiveDrawer">
 
-      </div >
+            <Switch>
+              <Route exact path="/" component={Top} />
+              <Route path="/login" component={Login} />
+              <Route path="/info" component={Info} />
+              <Route path="/term" component={Term} />
+              <Auth>
+                <Switch>
+                  <Route exact path="/home" component={Home} />
+                  <Route path='/create' component={Create} />
+                  <Route path='/postslist' component={PostsList} />
+                  <Route exact path="/posts/:id" component={PostsDetail} />
+                  <Route exact path="/users/:user_name" component={UserDetail} />
+                  <Route exact path="/search" component={Search} />
+                  <Route exact path="/logout" component={Logout} />
+                  <Route exact path="/deleteaccount" component={DeleteAccount} />
+                  <Route exact path="/privacy" component={Privacy} />
+
+                </Switch>
+              </Auth>
+            </Switch>
+          </ResponsiveDrawer>
+          <RouteRelatedBottomNavigation />
+
+        </div >
+      </Router>
+
     );
   }
 }

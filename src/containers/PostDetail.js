@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share'
+import { TwitterShareButton, TwitterIcon } from 'react-share'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
 import PieChart from '../components/SimplePieChart';
-import _ from 'lodash';
 import axios from 'axios';
 
 // スタイル
@@ -49,21 +48,6 @@ const styles = theme => ({
   }
 });
 
-const CustomButton = (props) => {
-  const customTheme = theme => ({
-    root: {
-      color: theme.palette.getContrastText(props.themeColor),
-      backgroundColor: props.themeColor,
-      '&:hover': {
-        backgroundColor: props.themeColor,
-        boxShadow: `0 3px 5px 2px ${props.themeColor}`,
-      },
-    },
-  })
-  const ComponentName = withStyles(customTheme)(Button)
-  return <ComponentName {...props} />
-}
-
 class PostsDetail extends React.Component {
 
   constructor(props) {
@@ -74,7 +58,6 @@ class PostsDetail extends React.Component {
     const auth_token = localStorage.auth_token
     const client_id = localStorage.client_id
     const uid = localStorage.uid
-    const { CurrentUserReducer } = this.props;
     axios.get(process.env.REACT_APP_API_URL + `/api/v1/posts/${this.props.match.params.id}`, {
       headers: {
         'access-token': auth_token,
@@ -122,7 +105,7 @@ class PostsDetail extends React.Component {
 
   renderGraphWithCondition(all_count) {
     const { classes } = this.props;
-    if (all_count != 0) {
+    if (all_count !== 0) {
       return (
         <Paper className={classes.root} elevation={1}>
           <Typography variant="headline" component="h1" className={classes.content}>
@@ -165,7 +148,7 @@ class PostsDetail extends React.Component {
 
   renderButtonWithCondition(user_answer_suki) {
     const { classes } = this.props;
-    if (user_answer_suki == 3) {
+    if (user_answer_suki === 3) {
       return (
         <Paper className={classes.root}>
           <Button variant="contained" size="large" color="secondary" className={classes.button} onClick={() => this.submitLike(1)}>
@@ -176,7 +159,7 @@ class PostsDetail extends React.Component {
           </Button>
         </Paper>
       )
-    } else if (user_answer_suki == 2) {
+    } else if (user_answer_suki === 2) {
       return (
         <Paper className={classes.root}>
           <Button variant="contained" size="large" color="secondary" className={classes.button} onClick={() => this.ChangeLike(1)}>
@@ -187,7 +170,7 @@ class PostsDetail extends React.Component {
           </Button>
         </Paper >
       )
-    } else if (user_answer_suki == 1) {
+    } else if (user_answer_suki === 1) {
       return (
         <Paper className={classes.root}>
           スキで回答済み。
@@ -196,7 +179,7 @@ class PostsDetail extends React.Component {
             </Button>
         </Paper>
       )
-    } else if (user_answer_suki == 0) {
+    } else if (user_answer_suki === 0) {
       return (
         <Paper className={classes.root}>
           キライで回答済み。
@@ -258,7 +241,6 @@ class PostsDetail extends React.Component {
   }
 
   DeletePost() {
-    const { CurrentUserReducer } = this.props;
     const auth_token = localStorage.auth_token
     const client_id = localStorage.client_id
     const uid = localStorage.uid
@@ -311,8 +293,6 @@ class PostsDetail extends React.Component {
   }
 
   render() {
-    const { CurrentUserReducer } = this.props;
-    const isloggedin = CurrentUserReducer.isLoggedin;
 
     const { classes } = this.props;
     return (
@@ -321,7 +301,6 @@ class PostsDetail extends React.Component {
 
           {this.renderGraphWithCondition(this.state.all_count)}
           {this.renderButtonWithCondition(this.state.user_answer_suki)}
-
 
           <TwitterShareButton title={this.state.content} url="http://www.sukiraism.com" via="sukiraism_O" target="_blank" className={classes.twitterbutton}>
             <TwitterIcon size="50" round />

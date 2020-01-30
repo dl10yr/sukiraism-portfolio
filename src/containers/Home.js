@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import './HomeStyles.css'
 
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
-import queryString from 'query-string';
-import _ from 'lodash';
 import axios from 'axios';
 
 import Cards, { Card } from 'react-swipe-card-chsstm';
@@ -23,12 +20,6 @@ const styles = theme => ({
     width: '60%',
     display: 'block',
     margin: 'auto',
-  },
-  conceptimg: {
-    display: 'flex',
-    width: '80%',
-    display: 'block',
-    margin: '10px auto',
   },
   button: {
     margin: '0px 5px',
@@ -164,8 +155,6 @@ class Home extends React.Component {
   }
 
   render() {
-    const { CurrentUserReducer } = this.props;
-    const { classes } = this.props;
     let cards;
 
     return (
@@ -185,6 +174,7 @@ class Home extends React.Component {
         >
           {this.state.not_answered_posts.map(item =>
             <Card
+              key={item.id}
               onSwipeLeft={() => this.submitKirai(item)}
               onSwipeRight={() => this.submitSuki(item)}>
 
@@ -213,10 +203,9 @@ class Home extends React.Component {
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
-  post: PropTypes.object.isRequired,
 };
 
-const mapState = (state, ownProps) => ({
+const mapState = (state) => ({
   CurrentUserReducer: state.CurrentUserReducer,
 });
 function mapDispatch(dispatch) {

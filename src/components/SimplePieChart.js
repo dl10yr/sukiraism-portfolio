@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  PieChart, Pie, Sector, Cell,
+  PieChart, Pie, Cell,
 } from 'recharts';
 
 const COLORS = ['#F92672', '#66D9EF',];
@@ -21,11 +21,6 @@ const renderCustomizedLabel = ({
 };
 
 export default class SimplePieChart extends PureComponent {
-  //static jsfiddleUrl = 'https://jsfiddle.net/alidingling/c9pL8k61/';
-
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     const { suki_percent, kirai_percent } = this.props;

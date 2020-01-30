@@ -16,7 +16,7 @@ import SendIcon from '@material-ui/icons/Send';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import SearchIcon from '@material-ui/icons/Search';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import ResponsiveDrawerListItem from '../components/ResponsiveDrawerListItem';
 
@@ -252,10 +252,7 @@ class ResponsiveDrawer extends React.Component {
   }
 
   render() {
-
     const { classes, theme, } = this.props;
-    const { CurrentUserReducer } = this.props;
-
     const drawer = (
       <div>
         {this.renderBarswithCondition()}
@@ -350,6 +347,6 @@ function mapDispatch(dispatch) {
   };
 }
 
-export default connect(mapState, mapDispatch)(
+export default withRouter(connect(mapState, mapDispatch)(
   withStyles(styles, { withTheme: true })(ResponsiveDrawer)
-);
+));

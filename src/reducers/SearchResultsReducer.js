@@ -35,7 +35,6 @@ const SearchResultsReducer = (state = initialState, action) => {
             noResults: true,
             searchWord: action.searchWord,
             doneFetch: action.doneFetch + 1,
-            searchWord: action.searchWord,
           };
         } else {
           return {

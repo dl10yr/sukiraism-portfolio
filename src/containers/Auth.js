@@ -67,7 +67,6 @@ class Auth extends React.Component {
   }
 
   render() {
-    const { CurrentUserReducer } = this.props;
     const isLoggedin = this.state.isLoggedin;
     const isLoading = this.state.isLoading;
     const { classes } = this.props;

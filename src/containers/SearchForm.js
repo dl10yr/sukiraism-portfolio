@@ -1,9 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import TextField from '@material-ui/core/TextField'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
+
 // import asyncValidate from './asyncValidate'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,31 +47,8 @@ const renderTextField = ({
     />
   )
 
-const renderCheckbox = ({ input, label }) => (
-  <div>
-    <FormControlLabel
-      control={
-        <Checkbox
-          checked={input.value ? true : false}
-          onChange={input.onChange}
-        />
-      }
-      label={label}
-    />
-  </div>
-)
-
-const renderFromHelper = ({ touched, error }) => {
-  if (!(touched && error)) {
-    return
-  } else {
-    return <FormHelperText>{touched && error}</FormHelperText>
-  }
-}
-
-
 const SearchForm = props => {
-  const { handleSubmit, pristine, reset, submitting } = props
+  const { handleSubmit } = props
   const classes = useStyles();
   return (
     <form onSubmit={handleSubmit}>
