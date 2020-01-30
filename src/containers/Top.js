@@ -99,7 +99,7 @@ class Top extends React.Component {
       .then((response) => {
         this.props.actions.setCurrentUserSuccess(response.data.data)
         // window.location.href = process.env.REACT_APP_BASE_URL + "/home"
-        this.props.router.push('/home')
+        // this.props.router.push('/home')
       })
       .catch(() => {
       });
