@@ -75,7 +75,7 @@ class Deleteaccount extends React.Component {
 
     return (
       <div className={classes.container}>
-        <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold', marginBottom: '30px' }}>
+        <Typography variant="h5" color="textPrimary" style={{ fontWeight: 'bold', marginBottom: '30px' }}>
           アカウントを削除しますか？
         </Typography>
         <Button variant="contained" size="large" color="secondary" className={classes.button} onClick={this.Deleteaccount}>

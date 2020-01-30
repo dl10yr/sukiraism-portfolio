@@ -14,6 +14,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import './term-style.css'
+import { Redirect } from 'react-router-dom'
+
 
 
 const styles = theme => ({
@@ -96,7 +98,8 @@ class Top extends React.Component {
     })
       .then((response) => {
         this.props.actions.setCurrentUserSuccess(response.data.data)
-        window.location.href = process.env.REACT_APP_BASE_URL + "/home"
+        // window.location.href = process.env.REACT_APP_BASE_URL + "/home"
+        this.props.router.push('/home')
       })
       .catch(() => {
       });
@@ -183,7 +186,8 @@ class Top extends React.Component {
           </Typography>
 
 
-          <Typography variant="headline" component="h2" className={classes.h2}>
+          <Typography variant="h4" className={classes.h4}>
+
             さあ、始めよう。
           </Typography>
           <button size="large" variant="contained" color="blue" onClick={this.loginTwitter} className={classes.loginbtn}>

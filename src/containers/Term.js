@@ -24,10 +24,10 @@ const styles = theme => ({
     marginTop: 10,
     marginBottom: 10,
   },
-  h3: {
+  h5: {
     marginBottom: 5,
     color: theme.palette.text.primary,
-
+    fontWeight: 'bold'
   },
   h2: {
 
@@ -61,7 +61,7 @@ class Term extends React.Component {
         <p className={classes.topsen}>この利用規約（以下、「本規約」といいます。）は、このWebサイトの管理者（以下、「管理者」といいます。）がこのWebサイト上で提供するサービス（以下、「本サービス」といいます。）の利用条件を定めるものです。本規約は、ユーザーと当サービス管理者との間の本サービスの利用に関わる一切の関係に適用されるものとします。本サービスを利用される方（以下、「利用者」）は、本規約の内容をご承諾いただいたものとみなしますので、以下の規定を守って利用してください。なお、本規約の内容は、必要に応じて変更することがありますので、ご利用の際には最新の利用規約をご覧ください。</p>
         <div className={classes.textLeft}>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               本サービスの利用
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -69,7 +69,7 @@ class Term extends React.Component {
             </Typography>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               免責事項
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -77,7 +77,7 @@ class Term extends React.Component {
             </Typography>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               禁止行為
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -115,7 +115,7 @@ class Term extends React.Component {
             </ol>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               利用制限及び登録抹消
             </Typography>
             <ol>
@@ -129,7 +129,7 @@ class Term extends React.Component {
             </ol>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               サービス内容の変更等
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -137,7 +137,7 @@ class Term extends React.Component {
             </Typography>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               個人情報の取扱い
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -145,7 +145,7 @@ class Term extends React.Component {
             </Typography>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               通知または連絡
               </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -153,7 +153,7 @@ class Term extends React.Component {
               </Typography>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               権利義務の譲渡の禁止
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -161,7 +161,7 @@ class Term extends React.Component {
             </Typography>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               準拠法・裁判管轄
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -171,7 +171,7 @@ class Term extends React.Component {
           <h2 className={classes.h2}>プライバシーポリシー</h2>
           <p className={classes.topsen}>本サービスでは以下のようにプライバシーポリシーを定めています。利用者は、本プライバシーポリシーの内容をご承諾いただいたものとみなします。</p>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               登録情報について
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -182,7 +182,7 @@ class Term extends React.Component {
             </Typography>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               本サービスの利用
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -190,7 +190,7 @@ class Term extends React.Component {
             </Typography>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               個人情報の第三者への開示
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -202,7 +202,7 @@ class Term extends React.Component {
             </ol>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               個人情報の開示、訂正、追加、削除、利用停止
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>
@@ -210,7 +210,7 @@ class Term extends React.Component {
             </Typography>
           </Paper>
           <Paper className={classes.root} elevation={1}>
-            <Typography variant="headline" component="h3" className={classes.h3}>
+            <Typography variant="h5" className={classes.h5}>
               プライバシーポリシーの変更について
             </Typography>
             <Typography component="p" style={{ whiteSpace: 'pre-line' }}>

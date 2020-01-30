@@ -36,7 +36,8 @@ const styles = theme => ({
     margin: 10,
   },
   content: {
-    wordWrap: 'break-word'
+    wordWrap: 'break-word',
+    fontWeight: 'bold'
   },
   twitterbutton: {
     margin: '20px'
@@ -108,7 +109,7 @@ class PostsDetail extends React.Component {
     if (all_count !== 0) {
       return (
         <Paper className={classes.root} elevation={1}>
-          <Typography variant="headline" component="h1" className={classes.content}>
+          <Typography variant="h5" className={classes.content}>
             {this.state.content}
           </Typography>
           <Typography component="p" style={{ fontWeight: 'bold' }}>
@@ -129,7 +130,7 @@ class PostsDetail extends React.Component {
     } else {
       return (
         <Paper className={classes.root} elevation={1}>
-          <Typography variant="headline" component="h1" className={classes.content}>
+          <Typography variant="h5" className={classes.content}>
             {this.state.content}
           </Typography>
           <Typography component="p" style={{ fontWeight: 'bold' }}>
@@ -316,10 +317,9 @@ class PostsDetail extends React.Component {
 
 PostsDetail.propTypes = {
   classes: PropTypes.object.isRequired,
-  post: PropTypes.object.isRequired,
 };
 
-const mapState = (state, ownprops) => ({
+const mapState = (state) => ({
   CurrentUserReducer: state.CurrentUserReducer,
 });
 function mapDispatch(dispatch) {

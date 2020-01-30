@@ -99,7 +99,7 @@ class Privacy extends React.Component {
 
     return (
       <div className={classes.container}>
-        <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold', marginBottom: '30px' }}>
+        <Typography variant="h5" color="textPrimary" style={{ fontWeight: 'bold', marginBottom: '30px' }}>
           {CurrentUserReducer.items.name}さんの<br />スキ・キライは<br />{display_status}されています
         </Typography>
         {this.renderUpdateStatusButton()}

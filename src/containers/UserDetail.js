@@ -76,7 +76,7 @@ const styles = theme => ({
     borderRadius: '50%',
     margin: '10px'
   },
-  headh3: {
+  headh5: {
     verticalAlign: 'top',
     display: 'inline-block',
     margin: '10px'
@@ -349,7 +349,7 @@ class UserDetail extends React.Component {
           <div className={classes.container} >
             <Paper>
               <img alt="user_icon" className={classes.iconimg} src={this.state.image} />
-              <Typography variant="headline" component="h3" className={classes.headh3}>
+              <Typography component="h5" className={classes.headh5}>
                 {this.state.name}さんの<br />スキキライは公開されていません。
               </Typography>
             </Paper>

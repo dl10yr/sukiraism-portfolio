@@ -172,7 +172,7 @@ class SearchPage extends React.Component {
               <Link to={"/posts/" + post.id} className={classes.link}>
                 <li className={classes.li} key={post.id}>
                   <div className={classes.licontent}>
-                    <Typography variant="body" component="body" color="textPrimary" className={classes.libody} >
+                    <Typography variant="body1" color="textPrimary" className={classes.libody} >
                       {post.content}
                     </Typography>
                   </div>
@@ -200,14 +200,14 @@ class SearchPage extends React.Component {
       )
     } else if (doneFetch === 1) {
       return (
-        <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold', marginTop: '10px' }}>
+        <Typography variant="h5" color="textPrimary" style={{ fontWeight: 'bold', marginTop: '10px' }}>
           検索ワードを<br />入力してください
         </Typography>
       )
 
     } else {
       return (
-        <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold', marginTop: '10px' }}>
+        <Typography variant="h5" color="textPrimary" style={{ fontWeight: 'bold', marginTop: '10px' }}>
           検索結果は<br />ありません
         </Typography>
       )
@@ -222,7 +222,7 @@ class SearchPage extends React.Component {
     return (
       <Scrollbars>
         <div className={classes.container}>
-          <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold' }}>
+          <Typography variant="h5" color="textPrimary" style={{ fontWeight: 'bold' }}>
             テーマ検索
         </Typography>
           <SearchForm onSubmit={this.searchPost} />

@@ -68,7 +68,7 @@ class Create extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        <Typography variant="h5" component="h5" color="textPrimary" style={{ fontWeight: 'bold' }}>
+        <Typography variant="h5" color="textPrimary" style={{ fontWeight: 'bold' }}>
           テーマの投稿
         </Typography>
         <CreateForm onSubmit={this.submitPost} />
