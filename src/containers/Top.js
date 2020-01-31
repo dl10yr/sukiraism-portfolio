@@ -14,9 +14,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import './term-style.css'
-import { Redirect } from 'react-router-dom'
-
-
 
 const styles = theme => ({
   // root: {
@@ -98,7 +95,7 @@ class Top extends React.Component {
     })
       .then((response) => {
         this.props.actions.setCurrentUserSuccess(response.data.data)
-        // window.location.href = process.env.REACT_APP_BASE_URL + "/home"
+        window.location.href = process.env.REACT_APP_BASE_URL + "/home"
         // this.props.router.push('/home')
       })
       .catch(() => {
@@ -133,7 +130,7 @@ class Top extends React.Component {
             「〜するべきだ」「〜しなくてはいけない」のような同調圧力が大きく、また、その理由を論理的に明確に説明できる人が少ないからです。
           </Typography>
           <Typography component="p" className={classes.p}>
-            「みんながやっているから」「それが世間だ」...そんな曖昧な理由で、他人の意思・時間を奪っていく人が多すぎると感じています。
+            「みんながやっているから」「それが世間だ」...そんな曖昧な理由で、他人の意思・時間を奪っていく人がたくさんいます。
           </Typography>
           <Typography component="p" className={classes.p}>
             その「〜するべきだ」といった「正しさ」も、その人の「好き嫌い」にしか過ぎず、「好き嫌い」を「正しい正しくない」にすり替えて押し付けているようにも感じます。
@@ -188,7 +185,7 @@ class Top extends React.Component {
 
           <Typography variant="h4" className={classes.h4}>
 
-            さあ、始めよう。
+            さあ、<br />始めよう。
           </Typography>
           <button size="large" variant="contained" color="blue" onClick={this.loginTwitter} className={classes.loginbtn}>
             Twitterでログインする

@@ -27,6 +27,7 @@ import RouteRelatedBottomNavigation from './containers/RouteRelatedBottomNavigat
 import { withStyles } from '@material-ui/core/styles';
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import ReactGA from 'react-ga';
 
 import "normalize.css";
 import "./App.css";
@@ -41,6 +42,12 @@ const styles = theme => ({
 });
 
 class App extends Component {
+  componentDidMount() {
+    const { pathname } = this.props.location;
+    ReactGA.set({ page: pathname });
+    ReactGA.pageview(pathname);
+  }
+
   render() {
     return (
       <Router>
