@@ -43,7 +43,6 @@ class Home extends React.Component {
     const auth_token = localStorage.auth_token
     const client_id = localStorage.client_id
     const uid = localStorage.uid
-    //新着順
     axios.get(process.env.REACT_APP_API_URL + `/api/v1/not_answered_posts`, {
       headers: {
         'access-token': auth_token,
