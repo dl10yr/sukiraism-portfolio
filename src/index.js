@@ -17,7 +17,7 @@ middlewares.push(thunk)
 const history = createBrowserHistory();
 
 
-// if (process.env.NODE_ENV === 'production') {
+// if (process.env.NODE_ENV !== 'production') {
 // } else {
 //   const { logger } = require('redux-logger')
 //   middlewares.push(logger)
