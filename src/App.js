@@ -53,7 +53,7 @@ class App extends Component {
         <div className="App">
           <Notification />
           <ResponsiveDrawer className="ResponsiveDrawer">
-            <Analytics id={process.env.REACT_APP_GOOGLE_ANALYTICS_SEACRET} debug>
+            <Analytics id={process.env.REACT_APP_GOOGLE_ANALYTICS_SEACRET} >
               <Switch>
                 <Route exact path="/" component={Top} />
                 <Route path="/login" component={Login} />
