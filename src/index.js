@@ -5,7 +5,6 @@ import App from './App';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { theme } from './materialui/theme'
 import { BrowserRouter as Router } from 'react-router-dom';
-import ReactGA from 'react-ga';
 
 import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux';
@@ -15,19 +14,16 @@ import { createStore, applyMiddleware } from 'redux';
 
 const middlewares = []
 middlewares.push(thunk)
-
-
-// if (process.env.NODE_ENV !== 'production') {
-//   const { logger } = require('redux-logger')
-//   middlewares.push(logger)
-// }
-
-ReactGA.initialize('UA-157448328-1');
 const history = createBrowserHistory();
-history.listen(({ pathname }) => {
-  ReactGA.set({ page: pathname });
-  ReactGA.pageview(pathname);
-});
+
+
+if (process.env.NODE_ENV === 'production') {
+} else {
+  const { logger } = require('redux-logger')
+  middlewares.push(logger)
+}
+
+
 const store = createStore(
   rootReducer,
   applyMiddleware(...middlewares)

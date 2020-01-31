@@ -23,11 +23,10 @@ import ResponsiveDrawer from './containers/ResponsiveDrawer';
 import RouteRelatedBottomNavigation from './containers/RouteRelatedBottomNavigation';
 
 
-
 import { withStyles } from '@material-ui/core/styles';
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import ReactGA from 'react-ga';
+import Analytics from 'react-router-ga';
 
 import "normalize.css";
 import "./App.css";
@@ -42,10 +41,9 @@ const styles = theme => ({
 });
 
 class App extends Component {
+
+
   componentDidMount() {
-    const { pathname } = this.props.location;
-    ReactGA.set({ page: pathname });
-    ReactGA.pageview(pathname);
   }
 
   render() {
@@ -55,27 +53,29 @@ class App extends Component {
         <div className="App">
           <Notification />
           <ResponsiveDrawer className="ResponsiveDrawer">
+            <Analytics id={process.env.GOOGLE_ANALYTICS_SEACRET} debug>
+              <Switch>
+                <Route exact path="/" component={Top} />
+                <Route path="/login" component={Login} />
+                <Route path="/info" component={Info} />
+                <Route path="/term" component={Term} />
+                <Auth>
+                  <Switch>
+                    <Route exact path="/home" component={Home} />
+                    <Route path='/create' component={Create} />
+                    <Route path='/postslist' component={PostsList} />
+                    <Route exact path="/posts/:id" component={PostsDetail} />
+                    <Route exact path="/users/:user_name" component={UserDetail} />
+                    <Route exact path="/search" component={Search} />
+                    <Route exact path="/logout" component={Logout} />
+                    <Route exact path="/deleteaccount" component={DeleteAccount} />
+                    <Route exact path="/privacy" component={Privacy} />
 
-            <Switch>
-              <Route exact path="/" component={Top} />
-              <Route path="/login" component={Login} />
-              <Route path="/info" component={Info} />
-              <Route path="/term" component={Term} />
-              <Auth>
-                <Switch>
-                  <Route exact path="/home" component={Home} />
-                  <Route path='/create' component={Create} />
-                  <Route path='/postslist' component={PostsList} />
-                  <Route exact path="/posts/:id" component={PostsDetail} />
-                  <Route exact path="/users/:user_name" component={UserDetail} />
-                  <Route exact path="/search" component={Search} />
-                  <Route exact path="/logout" component={Logout} />
-                  <Route exact path="/deleteaccount" component={DeleteAccount} />
-                  <Route exact path="/privacy" component={Privacy} />
+                  </Switch>
+                </Auth>
+              </Switch>
+            </Analytics>
 
-                </Switch>
-              </Auth>
-            </Switch>
           </ResponsiveDrawer>
           <RouteRelatedBottomNavigation />
 
