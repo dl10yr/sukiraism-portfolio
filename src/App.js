@@ -70,7 +70,6 @@ class App extends Component {
                     <Route exact path="/logout" component={Logout} />
                     <Route exact path="/deleteaccount" component={DeleteAccount} />
                     <Route exact path="/privacy" component={Privacy} />
-
                   </Switch>
                 </Auth>
               </Switch>
