@@ -54,7 +54,7 @@ class Create extends React.Component {
         this.props.formreset();
       })
       .catch((error) => {
-        console.log(str)
+        console.log(error)
         var str = error.response.data.exception
         if (str.indexOf("RecordNotUnique") !== -1) {
           this.props.actions.setNotification('error', '投稿内容が既に存在しています。');
