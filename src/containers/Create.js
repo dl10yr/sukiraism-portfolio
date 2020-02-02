@@ -54,13 +54,15 @@ class Create extends React.Component {
         this.props.formreset();
       })
       .catch((error) => {
-        console.log(error)
-        var str = error.response.data.exception
-        if (str.indexOf("RecordNotUnique") !== -1) {
-          this.props.actions.setNotification('error', '投稿内容が既に存在しています。');
-        } else {
-          this.props.actions.setNotification('error', '送信に失敗しました');
-        }
+        // console.log(error)
+        // var str = error.response.data.exception
+        this.props.actions.setNotification('error', '送信に失敗しました。投稿内容が既に存在しているかもしれません。');
+
+        // if (str.indexOf("RecordNotUnique") !== -1) {
+        //   this.props.actions.setNotification('error', '投稿内容が既に存在しています。');
+        // } else {
+        //   this.props.actions.setNotification('error', '送信に失敗しました');
+        // }
       })
 
   }
