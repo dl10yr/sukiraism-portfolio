@@ -62,6 +62,8 @@ class Auth extends React.Component {
             isLoading: false,
             isLoggedin: false,
           });
+          this.props.actions.setNotification('error', 'ログインしてください。');
+
         });
     }
   }

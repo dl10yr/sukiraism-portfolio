@@ -21,6 +21,9 @@ import axios from 'axios';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import usericon_default from '../images/usericon_default.png'
+
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -43,7 +46,7 @@ const styles = theme => ({
     maxWidth: 700,
   },
   paper: {
-    height: 300
+    padding: '10px'
   },
 
   button: {
@@ -214,6 +217,7 @@ class UserDetail extends React.Component {
       }
     })
       .then((response) => {
+        console.log(response)
         const data = response.data.data;
         this.setState({
           name: data.user.name,
@@ -271,12 +275,17 @@ class UserDetail extends React.Component {
     const { CurrentUserReducer } = this.props;
     const { UserPostsListReducer } = this.props;
 
+    var usericonlink = usericon_default
+    if (this.state.image !== null) {
+      usericonlink = this.state.image
+    }
+
     if (this.state.release === "released" || CurrentUserReducer.items.nickname === this.props.match.params.user_name) {
       return (
         <Scrollbars>
           <div className={classes.container} >
-            <Paper>
-              <img alt="user_icon" className={classes.iconimg} src={this.state.image} />
+            <Paper className={classes.paper}>
+              <img alt="user_icon" className={classes.iconimg} src={usericonlink} />
               <Typography variant="headline" component="h3" className={classes.headh3}>
                 {this.state.name}さんの<br />{UserPostsListReducer.selected}
               </Typography>
@@ -347,7 +356,7 @@ class UserDetail extends React.Component {
       return (
         <Scrollbars>
           <div className={classes.container} >
-            <Paper>
+            <Paper className={classes.paper}>
               <img alt="user_icon" className={classes.iconimg} src={this.state.image} />
               <Typography component="h5" className={classes.headh5}>
                 {this.state.name}さんの<br />スキキライは公開されていません。

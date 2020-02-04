@@ -26,6 +26,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
 
 import titlepng from '../images/title.png';
+import usericon_default from '../images/usericon_default.png'
 
 const drawerWidth = 240;
 const headerNavigationHeight = 56;
@@ -118,21 +119,22 @@ class ResponsiveDrawer extends React.Component {
     this.setState({ mobileOpen: true });
   }
 
-  renderUserlink() {
+  renderUserlink(usericonlink) {
     const { CurrentUserReducer } = this.props;
     const { classes } = this.props;
-    const image = CurrentUserReducer.items.image;
     const isLoggedin = CurrentUserReducer.isLoggedin;
     const nicknameLink = "/users/" + CurrentUserReducer.items.nickname;
+
     if (isLoggedin) {
+
       return (
         <Link to={nicknameLink}>
-          <img src={image} alt="nickname_link" className={classes.iconLogo} />
+          <img src={usericonlink} alt="nickname_link" className={classes.iconLogo} />
         </Link>
       )
     } else {
       return (
-        <a className={classes.a} href={process.env.REACT_APP_API127_URL + "/api/v1/auth/twitter?auth_origin_url=" + process.env.REACT_APP_BASE_URL + "/home"} >
+        <a className={classes.a} href={process.env.REACT_APP_BASE_URL} >
           <Icon>add_circle</Icon>
         </a>
 
@@ -164,14 +166,7 @@ class ResponsiveDrawer extends React.Component {
     if (isLoggedin) {
       return (
         <div>
-          <List>
-            <ResponsiveDrawerListItem
-              to="/postslist"
-              onClick={this.closeDrawerNav}
-              icon={<ViewListIcon />}
-              text="テーマ一覧"
-            />
-          </List>
+
           <List>
             <ResponsiveDrawerListItem
               to="/create"
@@ -253,8 +248,23 @@ class ResponsiveDrawer extends React.Component {
 
   render() {
     const { classes, theme, } = this.props;
+    const { CurrentUserReducer } = this.props;
+    var usericonlink = usericon_default
+    if (CurrentUserReducer.items.image !== null) {
+      usericonlink = CurrentUserReducer.items.image
+    }
+
+
     const drawer = (
       <div>
+        <List>
+          <ResponsiveDrawerListItem
+            to="/postslist"
+            onClick={this.closeDrawerNav}
+            icon={<ViewListIcon />}
+            text="テーマ一覧"
+          />
+        </List>
         {this.renderBarswithCondition()}
 
         <List>
@@ -295,7 +305,7 @@ class ResponsiveDrawer extends React.Component {
             </IconButton>
 
             {this.renderTitlelink()}
-            {this.renderUserlink()}
+            {this.renderUserlink(usericonlink)}
           </Toolbar>
         </AppBar>
         <Hidden mdUp>

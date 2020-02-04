@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import LoginForm from '../components/LoginForm';
+import SignUpForm from '../components/SignUpForm';
+
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import Typography from '@material-ui/core/Typography';
 import PeopleIcon from '@material-ui/icons/People';
@@ -14,6 +19,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import './term-style.css'
+
 
 const styles = theme => ({
   // root: {
@@ -75,11 +81,45 @@ const styles = theme => ({
     fontSize: 'large',
     color: 'rgb(255, 255, 255)',
     background: '#00acee',
-  }
+  },
+  tabs: {
+    borderBottom: '1px solid #e8e8e8',
+  },
+  indicator: {
+    backgroundColor: theme.palette.text.primary
+  },
+
+  tab: {
+    color: theme.palette.text.primary,
+    fontWeight: 'bold',
+    '&$selected': {
+      color: '#2dd57a;',
+    },
+    '&:hover': {
+      color: '#2dd57a;',
+      opacity: 1,
+    }
+  },
+  selected: {},
 });
 
 
 class Top extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: "signIn"
+    };
+
+
+    this.handleChange = this.handleChange.bind(this);
+    this.renderForm = this.renderForm.bind(this);
+    this.loginMail = this.loginMail.bind(this);
+    this.signUpMail = this.signUpMail.bind(this);
+
+
+  }
 
 
   componentDidMount() {
@@ -105,18 +145,149 @@ class Top extends React.Component {
     window.location.href = process.env.REACT_APP_API127_URL + '/api/v1/auth/twitter?auth_origin_url=' + process.env.REACT_APP_BASE_URL + '/home';
   }
 
+
+
+  handleChange(e, newvalue) {
+    if (newvalue === "signIn") {
+      this.setState({
+        selected: 'signIn'
+      })
+    } else if (newvalue === "signUp") {
+      this.setState({
+        selected: 'signUp'
+      })
+    }
+  }
+
+  loginMail() {
+    const { form } = this.props;
+
+    var email = form.LoginForm.values.email
+    var password = form.LoginForm.values.password
+
+    const data = {
+      email: email,
+      password: password,
+    }
+
+    axios.post(process.env.REACT_APP_API_URL + '/api/v1/auth/sign_in', data, {
+    })
+      .then((response) => {
+
+        this.props.actions.setNotification('success', 'ログインに成功しました');
+        localStorage.setItem('auth_token', response.headers['access-token'])
+        localStorage.setItem('client_id', response.headers['client'])
+        localStorage.setItem('uid', response.headers['uid'])
+        this.props.actions.setCurrentUserSuccess(response.data.data)
+        window.location.href = process.env.REACT_APP_BASE_URL + "/home"
+
+
+
+      })
+      .catch((error) => {
+        this.props.actions.setNotification('error', 'ログインに失敗しました。');
+
+      })
+
+  }
+
+  signUpMail() {
+    const { form } = this.props;
+
+    var email = form.SignUpForm.values.email
+    var nickname = form.SignUpForm.values.nickname
+
+    var password = form.SignUpForm.values.password
+    var passwordConfirmation = form.SignUpForm.values.passwordConfirmation
+
+    const data = {
+      nickname: nickname,
+      name: nickname,
+      email: email,
+      password: password,
+      password_confirmation: passwordConfirmation
+    }
+
+    axios.post(process.env.REACT_APP_API_URL + '/api/v1/auth', data, {
+    })
+      .then((response) => {
+        console.log(response)
+        this.props.actions.setNotification('success', 'ログインに成功しました');
+        localStorage.setItem('auth_token', response.headers['access-token'])
+        localStorage.setItem('client_id', response.headers['client'])
+        localStorage.setItem('uid', response.headers['uid'])
+        this.props.actions.setCurrentUserSuccess(response.data.data)
+        window.location.href = process.env.REACT_APP_BASE_URL + "/home"
+
+
+      })
+      .catch((error) => {
+        this.props.actions.setNotification('error', 'ログインに失敗しました。');
+
+      })
+
+  }
+
+  renderForm() {
+    const { classes } = this.props;
+
+    if (this.state.selected === "signIn") {
+      return (
+        <LoginForm onSubmit={this.loginMail} />
+
+      )
+    } else if (this.state.selected === "signUp") {
+      return (
+        <SignUpForm onSubmit={this.signUpMail} />
+      )
+    }
+  }
+
   render() {
 
-    // Material-ui関連
     const { classes } = this.props;
 
 
     return (
       <Scrollbars>
         <div className={classes.container}>
-          <button size="large" variant="contained" color="blue" onClick={this.loginTwitter} className={classes.loginbtn}>
+          {/* <button size="large" variant="contained" color="blue" onClick={this.loginTwitter} className={classes.loginbtn}>
             Twitterでログインする
-          </button>
+          </button> */}
+          <Typography component="p" className={classes.p}>
+            このページは「スキライズム」のポートフォリオ版です。本番環境(https://sukiraism.com)ではTwitterログインを採用しています。テストログイン用に以下のアカウントお使いください。
+          </Typography>
+          <Typography component="p" className={classes.p}>
+            email: test@test.com
+          </Typography>
+          <Typography component="p" className={classes.p}>
+            password: 123456
+          </Typography>
+          <div>
+
+            <Tabs
+              classes={{
+                root: classes.tabs,
+                indicator: classes.indicator,
+              }}
+              value={this.state.selected} variant="fullWidth" onChange={this.handleChange} aria-label="simple tabs example">
+              <Tab
+                classes={{
+                  root: classes.tab,
+                  selected: classes.selected,
+                }} selected
+                label="sign in" value="signIn" />
+              <Tab
+                classes={{
+                  root: classes.tab,
+                  selected: classes.selected,
+                }} selected
+                label="sign up" value="signUp" />
+            </Tabs>
+          </div>
+
+          {this.renderForm()}
+
           <Typography variant="h4" className={classes.h4}>
             好き嫌いの情報<br />を可視化する
           </Typography>
@@ -187,9 +358,9 @@ class Top extends React.Component {
 
             さあ、<br />始めよう。
           </Typography>
-          <button size="large" variant="contained" color="blue" onClick={this.loginTwitter} className={classes.loginbtn}>
+          {/* <button size="large" variant="contained" color="blue" onClick={this.loginTwitter} className={classes.loginbtn}>
             Twitterでログインする
-          </button>
+          </button> */}
 
         </div>
 
@@ -207,6 +378,8 @@ Top.propTypes = {
 
 const mapState = (state, ownProps) => ({
   CurrentUserReducer: state.CurrentUserReducer,
+  form: state.form,
+
 });
 function mapDispatch(dispatch) {
   return {

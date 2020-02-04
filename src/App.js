@@ -59,12 +59,12 @@ class App extends Component {
                 <Route path="/login" component={Login} />
                 <Route path="/info" component={Info} />
                 <Route path="/term" component={Term} />
+                <Route path='/postslist' component={PostsList} />
+                <Route exact path="/posts/:id" component={PostsDetail} />
                 <Auth>
                   <Switch>
                     <Route exact path="/home" component={Home} />
                     <Route path='/create' component={Create} />
-                    <Route path='/postslist' component={PostsList} />
-                    <Route exact path="/posts/:id" component={PostsDetail} />
                     <Route exact path="/users/:user_name" component={UserDetail} />
                     <Route exact path="/search" component={Search} />
                     <Route exact path="/logout" component={Logout} />

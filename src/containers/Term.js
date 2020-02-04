@@ -220,15 +220,6 @@ class Term extends React.Component {
               修正された最新のプライバシーポリシーは常に本ページにて開示されます。
             </Typography>
           </Paper>
-          <iframe
-            title="google-toiawase"
-            src="https://docs.google.com/forms/d/e/1FAIpQLSdJu4ntlnrRXeUQynp0QWw1gMWEomfap_oN6GGrtqY8uI9xAg/viewform?embedded=true"
-            width="400"
-            height="500"
-            frameborder="0"
-            marginheight="0"
-            marginwidth="0"
-          >読み込んでいます…</iframe>
         </div>
       </Scrollbars>
 

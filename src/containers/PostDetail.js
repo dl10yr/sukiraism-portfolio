@@ -54,7 +54,7 @@ class PostsDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_answer_suki: []
+      user_answer_suki: 4,
     };
     const auth_token = localStorage.auth_token
     const client_id = localStorage.client_id
@@ -80,7 +80,6 @@ class PostsDetail extends React.Component {
         });
       })
       .catch(() => {
-        this.props.history.push('/home')
       });
 
     axios.get(process.env.REACT_APP_API_URL + `/api/v1/likes/post/${this.props.match.params.id}/user/${uid}`, {
@@ -149,7 +148,14 @@ class PostsDetail extends React.Component {
 
   renderButtonWithCondition(user_answer_suki) {
     const { classes } = this.props;
-    if (user_answer_suki === 3) {
+
+    if (user_answer_suki === 4) {
+      return (
+        <Paper className={classes.root}>
+          投票するにはログインが必要です。
+        </Paper>
+      )
+    } else if (user_answer_suki === 3) {
       return (
         <Paper className={classes.root}>
           <Button variant="contained" size="large" color="secondary" className={classes.button} onClick={() => this.submitLike(1)}>
