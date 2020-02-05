@@ -18,8 +18,8 @@ const history = createBrowserHistory();
 
 
 
-const { logger } = require('redux-logger')
-middlewares.push(logger)
+// const { logger } = require('redux-logger')
+// middlewares.push(logger)
 
 
 
