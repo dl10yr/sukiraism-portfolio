@@ -211,7 +211,6 @@ class Top extends React.Component {
     axios.post(process.env.REACT_APP_API_URL + '/api/v1/auth', data, {
     })
       .then((response) => {
-        console.log(response)
         this.props.actions.setNotification('success', 'ログインに成功しました');
         localStorage.setItem('auth_token', response.headers['access-token'])
         localStorage.setItem('client_id', response.headers['client'])
