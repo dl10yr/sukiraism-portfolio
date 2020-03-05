@@ -1,13 +1,13 @@
 # スキライズム
 投稿されたテーマに対して「スキ」「キライ」を投票することにより、自分の好き嫌いを管理し、みんなの好き嫌いも知ることのできる投票サービス
-フロントエンド: 
-バックエンド: 
-# 使用言語
+(https://sukiraism-portfolio.herokuapp.com/)
+
+## 使用言語
 * バックエンド: Ruby on Rails
 * フロントエンド: React
-# 実装した機能
+## 実装した機能
 * Ruby on Rails APIモードを用いたCRUD実装
-
+(https://qiita.com/dl10yr/items/533cecd1d6f9abcfd13c)
 * devise_token_authを用いたログイン機能
 
 * Reduxを用いたリダイレクトなどのログイン処理周りの実装
