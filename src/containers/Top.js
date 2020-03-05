@@ -254,7 +254,10 @@ class Top extends React.Component {
             Twitterでログインする
           </button> */}
           <Typography component="p" className={classes.p}>
-            このページは「スキライズム」のポートフォリオ版です。本番環境(https://sukiraism.com)ではTwitterログインを採用しています。テストログイン用に以下のアカウントお使いください。
+            このページは「スキライズム」のポートフォリオ版です。テストログイン用に以下のアカウントお使いください。
+          </Typography>
+          <Typography component="p" className={classes.p}>
+            バックエンドはherokuの無料版なのでスリープに入っている可能性があり、接続に失敗もしくは時間がかかる場合があります。
           </Typography>
           <Typography component="p" className={classes.p}>
             email: test@test.com
