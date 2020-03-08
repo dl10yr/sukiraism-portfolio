@@ -273,12 +273,12 @@ class Top extends React.Component {
             コードはGithubにあります。
           </Typography>
           <Typography className={classes.p}>
-            <Link href="https://github.com/dl10yr/sukiraism-portfolio" onClick={preventDefault}>
+            <Link href="https://github.com/dl10yr/sukiraism-portfolio" >
               フロントエンド（https://github.com/dl10yr/sukiraism-portfolio）
             </Link>
           </Typography>
           <Typography className={classes.p}>
-            <Link href="https://github.com/dl10yr/sukiraism-portfolio-api" onClick={preventDefault}>
+            <Link href="https://github.com/dl10yr/sukiraism-portfolio-api" >
               バックエンド（https://github.com/dl10yr/sukiraism-portfolio-api）
             </Link>
           </Typography>
