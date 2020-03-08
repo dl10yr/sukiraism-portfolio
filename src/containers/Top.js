@@ -256,14 +256,29 @@ class Top extends React.Component {
           <Typography component="p" className={classes.p}>
             このページは「スキライズム」のポートフォリオ版です。テストログイン用に以下のアカウントお使いください。
           </Typography>
-          <Typography component="p" className={classes.p}>
-            バックエンドはherokuの無料版なのでスリープに入っている可能性があり、接続に失敗もしくは時間がかかる場合があります。
-          </Typography>
+
+
           <Typography component="p" className={classes.p}>
             email: test@test.com
           </Typography>
           <Typography component="p" className={classes.p}>
             password: 123456
+          </Typography>
+          <Typography component="p" className={classes.p}>
+            バックエンドはherokuの無料版なのでスリープに入っている可能性があり、接続に失敗もしくは時間がかかる場合があります。
+          </Typography>
+          <Typography component="p" className={classes.p}>
+            コードはGithubにあります。
+          </Typography>
+          <Typography className={classes.p}>
+            <Link href="https://github.com/dl10yr/sukiraism-portfolio" onClick={preventDefault}>
+              フロントエンド（https://github.com/dl10yr/sukiraism-portfolio）
+            </Link>
+          </Typography>
+          <Typography className={classes.p}>
+            <Link href="https://github.com/dl10yr/sukiraism-portfolio-api" onClick={preventDefault}>
+              バックエンド（https://github.com/dl10yr/sukiraism-portfolio-api）
+            </Link>
           </Typography>
           <div>
 
