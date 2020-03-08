@@ -7,6 +7,8 @@ import SignUpForm from '../components/SignUpForm';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Link from '@material-ui/core/Link';
+
 
 import Typography from '@material-ui/core/Typography';
 import PeopleIcon from '@material-ui/icons/People';
